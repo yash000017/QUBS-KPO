@@ -149,7 +149,7 @@ p{font-weight:300}
 .tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue-400)}
 
 /* NAVBAR */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,30,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);transition:background var(--tr)}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;height:var(--nav-h,72px);display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,30,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);transition:background var(--tr)}
 .navbar.scrolled{background:rgba(4,13,30,0.96)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
 .logo-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:600;font-size:18px;color:white}
@@ -167,13 +167,13 @@ p{font-weight:300}
 .btn-lg{padding:15px 32px;font-size:16px;border-radius:12px}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all 0.3s}
-.mobile-nav{display:none;position:fixed;top:72px;left:0;right:0;z-index:999;background:rgba(4,13,30,0.97);backdrop-filter:blur(20px);padding:16px 5%;border-bottom:1px solid var(--gb);flex-direction:column;gap:4px}
+.mobile-nav{display:none;position:fixed;top:var(--nav-h,72px);left:0;right:0;z-index:999;background:rgba(4,13,30,0.97);backdrop-filter:blur(20px);padding:16px 5%;border-bottom:1px solid var(--gb);flex-direction:column;gap:4px}
 .mobile-nav.open{display:flex}
 .mobile-nav a{color:var(--gray-300);text-decoration:none;font-size:16px;font-weight:400;padding:12px 16px;border-radius:10px;cursor:pointer;transition:all 0.2s}
 .mobile-nav a:hover,.mobile-nav a.active{color:var(--teal-400);background:rgba(0,212,170,0.1)}
 
 /* PAGE */
-.page{min-height:100vh;padding-top:72px;animation:fadeIn 0.5s ease}
+.page{min-height:100vh;padding-top:var(--nav-h,72px);animation:fadeIn 0.5s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 section{padding:80px 5%}
 .section-header{text-align:center;max-width:720px;margin:0 auto 64px}
@@ -181,7 +181,7 @@ section{padding:80px 5%}
 .section-header p{color:var(--gray-300);font-size:17px;line-height:1.7;font-weight:300}
 
 /* HERO */
-.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 5%}
+.hero{min-height:calc(100vh - var(--nav-h,72px));display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 5%}
 #hero-canvas{position:absolute;inset:0;z-index:0}
 .glow-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
 .orb1{width:500px;height:500px;background:rgba(59,114,248,0.14);top:-120px;left:-80px}
@@ -190,10 +190,10 @@ section{padding:80px 5%}
 .hero h1{font-size:clamp(36px,5.5vw,64px);font-weight:200;line-height:1.1;margin-bottom:24px;letter-spacing:-0.025em}
 .hero p.lead{font-size:18px;color:var(--gray-300);max-width:560px;margin-bottom:40px;line-height:1.8;font-weight:300}
 .hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
-.hero-stats{display:flex;gap:clamp(20px,3vw,36px);flex-wrap:nowrap}
-.hero-stat{display:flex;align-items:baseline;gap:3px;flex-shrink:0;white-space:nowrap}
-.hero-stat .num{font-size:34px;font-weight:500;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;display:inline-block;min-width:3ch;text-align:right}
-.hero-stat .lbl{font-size:13px;color:var(--gray-500);font-weight:300}
+.hero-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,36px)}
+.hero-stat{display:flex;align-items:baseline;gap:3px;min-width:0}
+.hero-stat .num{font-size:clamp(24px,4vw,34px);font-weight:500;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;display:inline-block;min-width:2.5ch;text-align:right}
+.hero-stat .lbl{font-size:clamp(10px,1.5vw,13px);color:var(--gray-500);font-weight:300;line-height:1.3}
 .hero-card{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:2;background:var(--glass);backdrop-filter:blur(24px);border:1px solid var(--gb);border-radius:var(--rl);padding:28px;width:300px;animation:float 6s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(-50%)}50%{transform:translateY(calc(-50% - 14px))}}
 .hero-card h3{font-size:15px;font-weight:500;margin-bottom:18px;color:var(--gray-300)}
@@ -211,7 +211,7 @@ section{padding:80px 5%}
 .client-logo small{font-size:10px;color:var(--gray-500);font-weight:400;margin-top:2px;letter-spacing:0}
 
 /* CARDS */
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .grid-2c{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 .scard{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:32px;transition:all var(--tr);cursor:pointer;position:relative;overflow:hidden}
@@ -254,6 +254,12 @@ section{padding:80px 5%}
 .cta-banner h2{font-size:clamp(26px,4vw,40px);font-weight:500;margin-bottom:16px;position:relative;letter-spacing:-0.025em}
 .cta-banner p{color:var(--gray-300);font-size:17px;margin-bottom:36px;position:relative;font-weight:300}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+.bk-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px}
+.bk-svc-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important}
+.bk-step-sub{margin-bottom:28px}
+.bk-step-sub h2{font-size:24px}
+.bk-form-narrow{max-width:560px;margin:0 auto}
+.conf-grid{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13px}
 
 /* ABOUT */
 .about-hero{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--rl);padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:72px;position:relative;overflow:hidden}
@@ -406,29 +412,107 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 @media(max-width:1024px){
   .nav-links,.btn-nav-cta{display:none}
   .hamburger{display:flex}
-  .grid-2,.contact-grid,.svc-detail,.about-hero{grid-template-columns:1fr}
-  .hero-card{display:none}
+  .grid-2,.grid-2c,.contact-grid,.svc-detail,.about-hero{grid-template-columns:1fr}
+  .hero{min-height:auto;padding:64px 5% 56px;flex-direction:column;align-items:flex-start}
+  .hero-card{display:block;position:static;transform:none;animation:none;width:100%;max-width:420px;margin-top:40px}
   .foot-grid{grid-template-columns:1fr 1fr}
   .val-grid{grid-template-columns:1fr 1fr}
   .proc-grid{grid-template-columns:1fr 1fr}
   .proc-grid::before{display:none}
   .mv-grid{grid-template-columns:1fr}
+  .orb1{width:320px;height:320px}
+  .orb2{width:240px;height:240px}
+}
+@media(max-width:768px){
+  section{padding:64px 5%}
+  .section-header{margin-bottom:48px}
+  .section-header h2{font-size:clamp(26px,6vw,36px)}
+  .section-header p{font-size:15px}
+  .navbar{padding:0 4%}
+  .hero{padding:48px 4% 40px}
+  .hero h1{font-size:clamp(28px,7vw,40px)}
+  .hero p.lead{font-size:16px;margin-bottom:32px}
+  .hero-btns{flex-direction:column;margin-bottom:40px}
+  .hero-btns .btn{width:100%}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:16px 12px}
+  .hero-stat{flex-direction:column;align-items:flex-start;gap:2px}
+  .hero-stat .num{text-align:left}
+  .clients{padding:28px 4%}
+  .clients-inner{flex-direction:column;align-items:flex-start;gap:20px}
+  .clients-logos{gap:10px}
+  .client-logo{font-size:12px;padding:8px 14px}
+  .grid-4{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr}
+  .why-big{padding:28px}
+  .why-big-num{font-size:56px}
+  .cta-banner{padding:40px 24px}
+  .cta-btns{flex-direction:column;align-items:stretch}
+  .cta-btns .btn{width:100%}
+  .form-card{padding:28px 20px}
+  .contact-info h3{font-size:24px}
+  .sd-card,.mv-card{padding:28px 22px}
+  .scard{padding:24px}
+  .ind-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .ind-card{padding:20px 14px}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .foot-brand p{max-width:100%}
+  .bk-steps{gap:8px;margin-bottom:36px}
+  .bk-steps::before{display:none}
+  .bk-num{width:36px;height:36px;font-size:13px}
+  .bk-lbl{font-size:11px}
+  .cal-card{padding:20px 16px;max-width:100%}
+  .cal-day{font-size:12px}
+  .time-slots{grid-template-columns:repeat(2,1fr);max-width:100%}
+  .bk-actions{flex-direction:column;align-items:stretch}
+  .bk-actions .btn{width:100%;margin:0!important}
+  .bk-step-sub h2{font-size:20px}
+  .bk-svc-grid{grid-template-columns:repeat(2,1fr)!important}
+  .toast{left:16px;right:16px;bottom:16px}
+  .faq-item summary{padding:16px 18px;font-size:14px}
+  .form-row{grid-template-columns:1fr}
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{font-size:16px}
+  .citem-text p{word-break:break-word}
+}
+@media(max-width:480px){
+  :root{--nav-h:64px}
+  section{padding:48px 4%}
+  .section-header{margin-bottom:36px}
+  .navbar{height:64px;padding:0 16px}
+  .mobile-nav{top:64px;padding:12px 16px}
+  .page{padding-top:64px}
+  .logo-text{font-size:16px}
+  .logo-icon{width:34px;height:34px;font-size:16px}
+  .hero{padding:40px 16px 32px}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:14px 10px}
+  .hero-stat .num{font-size:22px}
+  .hero-stat .lbl{font-size:10px}
+  .chip-list{grid-template-columns:1fr}
+  .why-smalls{grid-template-columns:1fr}
+  .why-big-num{font-size:48px}
+  .val-grid{grid-template-columns:1fr}
+  .ind-grid{grid-template-columns:1fr}
+  .sub-grid{grid-template-columns:1fr}
+  .bk-svc-grid{grid-template-columns:1fr!important}
+  .bk-step .bk-lbl{display:none}
+  .bk-steps{justify-content:center;gap:6px}
+  .bk-num{width:32px;height:32px;font-size:12px}
+  .time-slots{grid-template-columns:1fr 1fr;gap:8px}
+  .tslot{font-size:13px;padding:10px 4px}
+  .conf-grid{grid-template-columns:1fr;gap:6px}
+  .conf-grid span:nth-child(odd){color:var(--gray-500);margin-top:8px}
+  .foot-bottom{flex-direction:column;gap:12px;text-align:center}
+  .foot-bottom>div{flex-direction:column;gap:8px}
+  .scard .s-icon{width:44px;height:44px;font-size:22px;margin-bottom:14px}
+  .pnum-wrap{width:60px;height:60px}
+  .pnum-wrap span{font-size:18px}
+  .about-hero{padding:24px 20px;margin-bottom:48px}
+  .cta-banner{padding:32px 18px}
+  .btn-lg{padding:13px 20px;font-size:15px}
+  .wpoint{gap:14px}
+  .wpoint-icon{width:40px;height:40px;font-size:18px}
+  .svc-detail{margin-bottom:48px}
 }
 @media(max-width:640px){
-  section{padding:56px 5%}
-  .ind-grid{grid-template-columns:repeat(2,1fr)}
-  .foot-grid{grid-template-columns:1fr;gap:28px}
-  .hero-stats{gap:16px}
-  .hero-stat .num{font-size:28px;min-width:2.5ch}
-  .hero-stat .lbl{font-size:11px}
-  .why-smalls{grid-template-columns:1fr 1fr}
-  .val-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .time-slots{grid-template-columns:repeat(2,1fr)}
-  .cta-banner{padding:36px 22px}
-  .about-hero{padding:28px}
-  .foot-bottom{flex-direction:column;gap:8px;text-align:center}
-  .bk-step .bk-lbl{display:none}
   .svc-detail{grid-template-columns:1fr!important;direction:ltr!important}
 }
 </style>
@@ -599,7 +683,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
     </div>
   </section>
 
-  <section style="padding-bottom:100px">
+  <section style="padding-bottom:clamp(48px,10vw,100px)">
     <div class="cta-banner reveal">
       <h2>Ready to Reduce Your <span class="gt">Accounting Overhead?</span></h2>
       <p>Join 500+ UK businesses and accounting firms that trust Quantum KPO for reliable, accurate, and cost-effective accounting support.</p>
@@ -923,8 +1007,8 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 
       <!-- Step 1 -->
       <div class="bk-content active" id="bs-1">
-        <div class="section-header" style="margin-bottom:32px"><h2 style="font-size:24px">What would you like to discuss?</h2><p>Select the service area most relevant to your enquiry</p></div>
-        <div class="grid-4" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="section-header bk-step-sub"><h2>What would you like to discuss?</h2><p>Select the service area most relevant to your enquiry</p></div>
+        <div class="grid-4 bk-svc-grid">
           <div class="scard" onclick="selSvc(this,'Bookkeeping & Accounts')"><div class="s-icon">📊</div><h3 style="font-size:15px">Bookkeeping</h3></div>
           <div class="scard" onclick="selSvc(this,'Payroll Processing & RTI')"><div class="s-icon">💷</div><h3 style="font-size:15px">Payroll</h3></div>
           <div class="scard" onclick="selSvc(this,'VAT Returns')"><div class="s-icon">📋</div><h3 style="font-size:15px">VAT Returns</h3></div>
@@ -938,7 +1022,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 
       <!-- Step 2 -->
       <div class="bk-content" id="bs-2">
-        <div class="section-header" style="margin-bottom:28px"><h2 style="font-size:24px">Choose a Date</h2><p>Select your preferred consultation date (Mon–Sat available)</p></div>
+        <div class="section-header bk-step-sub"><h2>Choose a Date</h2><p>Select your preferred consultation date (Mon–Sat available)</p></div>
         <div class="cal-card">
           <div class="cal-nav">
             <button class="cal-btn" onclick="chMon(-1)">‹</button>
@@ -948,15 +1032,15 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           <div class="cal-dh"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
           <div class="cal-days" id="calDays"></div>
         </div>
-        <div style="text-align:center;margin-top:22px">
-          <button class="btn btn-outline" onclick="goBkStep(1)" style="margin-right:12px">← Back</button>
+        <div class="bk-actions">
+          <button class="btn btn-outline" onclick="goBkStep(1)">← Back</button>
           <button class="btn btn-primary" id="nextDateBtn" onclick="goBkStep(3)" disabled>Next →</button>
         </div>
       </div>
 
       <!-- Step 3 -->
       <div class="bk-content" id="bs-3">
-        <div class="section-header" style="margin-bottom:28px"><h2 style="font-size:24px">Choose a Time Slot</h2><p>All times in IST. Selected: <strong id="selDateDisp">—</strong></p></div>
+        <div class="section-header bk-step-sub"><h2>Choose a Time Slot</h2><p>All times in IST. Selected: <strong id="selDateDisp">—</strong></p></div>
         <div class="time-slots">
           <button class="tslot" onclick="selTime(this,'9:00 AM')">9:00 AM</button>
           <button class="tslot" onclick="selTime(this,'9:30 AM')">9:30 AM</button>
@@ -974,16 +1058,16 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           <button class="tslot" onclick="selTime(this,'5:00 PM')">5:00 PM</button>
           <button class="tslot" onclick="selTime(this,'5:30 PM')">5:30 PM</button>
         </div>
-        <div style="text-align:center;margin-top:28px">
-          <button class="btn btn-outline" onclick="goBkStep(2)" style="margin-right:12px">← Back</button>
+        <div class="bk-actions">
+          <button class="btn btn-outline" onclick="goBkStep(2)">← Back</button>
           <button class="btn btn-primary" id="nextTimeBtn" onclick="goBkStep(4)" disabled>Next →</button>
         </div>
       </div>
 
       <!-- Step 4 -->
       <div class="bk-content" id="bs-4">
-        <div class="section-header" style="margin-bottom:28px"><h2 style="font-size:24px">Your Contact Details</h2><p>We'll send a confirmation to your email</p></div>
-        <div class="form-card" style="max-width:560px;margin:0 auto">
+        <div class="section-header bk-step-sub"><h2>Your Contact Details</h2><p>We'll send a confirmation to your email</p></div>
+        <div class="form-card bk-form-narrow">
           <div class="form-row">
             <div class="form-group"><label>First Name</label><input type="text" id="bf" placeholder="John" required></div>
             <div class="form-group"><label>Last Name</label><input type="text" id="bl" placeholder="Smith"></div>
@@ -993,19 +1077,19 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           <div class="form-group"><label>Phone Number</label><input type="tel" id="bp" placeholder="+44 7700 900000"></div>
           <div class="form-group"><label>Anything to share in advance?</label><textarea id="bn" placeholder="Brief description of your requirements, volume of work, software used..." style="min-height:80px"></textarea></div>
         </div>
-        <div style="text-align:center;margin-top:22px">
-          <button class="btn btn-outline" onclick="goBkStep(3)" style="margin-right:12px">← Back</button>
+        <div class="bk-actions">
+          <button class="btn btn-outline" onclick="goBkStep(3)">← Back</button>
           <button class="btn btn-primary" onclick="goBkStep(5)">Review Booking →</button>
         </div>
       </div>
 
       <!-- Step 5 -->
       <div class="bk-content" id="bs-5">
-        <div id="confCard" class="form-card" style="max-width:560px;margin:0 auto;text-align:center">
+        <div id="confCard" class="form-card bk-form-narrow" style="text-align:center">
           <div style="font-size:48px;margin-bottom:14px">📋</div>
           <h3 style="font-size:22px;font-weight:500;margin-bottom:22px;letter-spacing:-0.02em">Confirm Your Booking</h3>
           <div style="background:var(--navy-800);border-radius:var(--r);padding:20px;margin-bottom:22px;text-align:left">
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13px">
+            <div class="conf-grid">
               <span style="color:var(--gray-500)">Service</span><span id="cs" style="font-weight:500">—</span>
               <span style="color:var(--gray-500)">Date</span><span id="cd" style="font-weight:500">—</span>
               <span style="color:var(--gray-500)">Time</span><span id="ct" style="font-weight:500">—</span>
@@ -1016,10 +1100,12 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           </div>
           <p style="font-size:13px;color:var(--gray-300);margin-bottom:22px;font-weight:300">On confirming, the booking details will be sent to quantum-kpo@gmail.com and a confirmation will be emailed to you.</p>
           <div id="bkErrMsg" style="display:none;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;color:#fca5a5;text-align:left"></div>
-          <button class="btn btn-outline" onclick="goBkStep(4)" style="margin-right:10px">← Edit</button>
-          <button class="btn btn-primary btn-lg" id="confirmBkBtn" onclick="confirmBk()">✅ Confirm Booking</button>
+          <div class="bk-actions">
+            <button class="btn btn-outline" onclick="goBkStep(4)">← Edit</button>
+            <button class="btn btn-primary btn-lg" id="confirmBkBtn" onclick="confirmBk()">✅ Confirm Booking</button>
+          </div>
         </div>
-        <div id="bkSucc" style="display:none;max-width:560px;margin:24px auto;text-align:center">
+        <div id="bkSucc" class="bk-form-narrow" style="display:none;margin:24px auto;text-align:center">
           <div style="background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);border-radius:var(--rl);padding:44px">
             <div style="font-size:56px;margin-bottom:14px">🎉</div>
             <h3 style="font-size:24px;font-weight:500;margin-bottom:12px;color:var(--teal-400);letter-spacing:-0.02em">Booking Confirmed!</h3>
