@@ -205,8 +205,10 @@ section{padding:80px 5%}
 .clients{padding:36px 5%;border-top:1px solid var(--gb);border-bottom:1px solid var(--gb)}
 .clients-inner{display:flex;align-items:center;gap:48px;flex-wrap:wrap}
 .clients-label{font-size:12px;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;flex-shrink:0;font-weight:400}
-.clients-logos{display:flex;gap:36px;flex-wrap:wrap;align-items:center}
-.cp{height:24px;background:rgba(255,255,255,0.1);border-radius:6px;opacity:0.45}
+.clients-logos{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.client-logo{display:inline-flex;flex-direction:column;align-items:center;padding:10px 18px;border:1px solid var(--gb);border-radius:8px;background:rgba(255,255,255,0.04);color:var(--gray-300);font-size:13px;font-weight:500;letter-spacing:-0.01em;white-space:nowrap;opacity:0.8;transition:opacity var(--tr),border-color var(--tr)}
+.client-logo:hover{opacity:1;border-color:rgba(59,114,248,0.35)}
+.client-logo small{font-size:10px;color:var(--gray-500);font-weight:400;margin-top:2px;letter-spacing:0}
 
 /* CARDS */
 .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px}
@@ -448,7 +450,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
     <li><a href="#clientele" onclick="nav('clientele');return false" data-p="clientele">Clientele</a></li>
     <li><a href="#contact" onclick="nav('contact');return false" data-p="contact">Contact Us</a></li>
   </ul>
-  <button class="btn btn-primary btn-nav-cta" onclick="nav('book')">📅 Book a Meeting</button>
+  <a href="#book" class="btn btn-primary btn-nav-cta" onclick="nav('book');return false">📅 Book a Meeting</a>
   <button class="hamburger" id="hbg" onclick="toggleMob()" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
@@ -501,9 +503,12 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
     <div class="clients-inner">
       <span class="clients-label">Trusted by UK Businesses</span>
       <div class="clients-logos">
-        <div class="cp" style="width:88px"></div><div class="cp" style="width:68px"></div>
-        <div class="cp" style="width:108px"></div><div class="cp" style="width:82px"></div>
-        <div class="cp" style="width:94px"></div><div class="cp" style="width:72px"></div>
+        <span class="client-logo">Harrison Accountants<small>Leeds</small></span>
+        <span class="client-logo">Collins &amp; Co<small>Manchester</small></span>
+        <span class="client-logo">Sunrise Care Group<small>Birmingham</small></span>
+        <span class="client-logo">UK Accountancy Firms<small>London</small></span>
+        <span class="client-logo">Care &amp; Healthcare<small>Liverpool</small></span>
+        <span class="client-logo">Retail &amp; E-commerce<small>Glasgow</small></span>
       </div>
     </div>
   </div>
@@ -1033,49 +1038,58 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 <footer>
   <div class="foot-grid">
     <div class="foot-brand">
-      <div class="logo" onclick="nav('home')"><div class="logo-icon">Q</div><div class="logo-text">Quantum<span>KPO</span></div></div>
+      <a href="#home" class="logo" onclick="nav('home');return false" aria-label="Quantum KPO — Home">
+        <div class="logo-icon">Q</div>
+        <div class="logo-text">Quantum<span>KPO</span></div>
+      </a>
       <p>India's trusted UK accounting outsourcing partner — delivering precision, expertise, and cost-effective accounting support to UK businesses and practices.</p>
       <div class="socials">
-        <a class="social" title="LinkedIn">in</a>
-        <a class="social" title="Twitter">𝕏</a>
-        <a class="social" title="Facebook">f</a>
-        <a class="social" href="mailto:quantum-kpo@gmail.com" title="Email">✉</a>
+        <span class="social" title="LinkedIn">in</span>
+        <span class="social" title="Twitter">𝕏</span>
+        <span class="social" title="Facebook">f</span>
+        <a class="social" href="mailto:quantum-kpo@gmail.com" title="Email us">✉</a>
       </div>
     </div>
     <div class="foot-col">
       <h5>Company</h5>
       <ul class="foot-links">
-        <li><a onclick="nav('about')">About Us</a></li>
-        <li><a onclick="nav('about')">Our Team</a></li>
-        <li><a onclick="nav('clientele')">Clientele</a></li>
-        <li><a onclick="nav('contact')">Careers</a></li>
-        <li><a onclick="nav('contact')">Partner With Us</a></li>
+        <li><a href="#about" onclick="nav('about');return false">About Us</a></li>
+        <li><a href="#about" onclick="nav('about');return false">Our Team</a></li>
+        <li><a href="#clientele" onclick="nav('clientele');return false">Clientele</a></li>
+        <li><a href="#contact" onclick="nav('contact');return false">Careers</a></li>
+        <li><a href="#contact" onclick="nav('contact');return false">Partner With Us</a></li>
       </ul>
     </div>
     <div class="foot-col">
       <h5>Services</h5>
       <ul class="foot-links">
-        <li><a onclick="nav('services')">Bookkeeping</a></li>
-        <li><a onclick="nav('services')">Payroll & RTI</a></li>
-        <li><a onclick="nav('services')">VAT Returns</a></li>
-        <li><a onclick="nav('services')">Self Assessment</a></li>
-        <li><a onclick="nav('services')">Corporation Tax</a></li>
-        <li><a onclick="nav('services')">Year-End Accounts</a></li>
+        <li><a href="#services" onclick="nav('services');return false">Bookkeeping</a></li>
+        <li><a href="#services" onclick="nav('services');return false">Payroll &amp; RTI</a></li>
+        <li><a href="#services" onclick="nav('services');return false">VAT Returns</a></li>
+        <li><a href="#services" onclick="nav('services');return false">Self Assessment</a></li>
+        <li><a href="#services" onclick="nav('services');return false">Corporation Tax</a></li>
+        <li><a href="#services" onclick="nav('services');return false">Year-End Accounts</a></li>
       </ul>
     </div>
     <div class="foot-col">
       <h5>Contact</h5>
       <div class="foot-contact">
         <div class="fci"><span>📍</span><span>514, Nobles Trade Centre, Memnagar, Ahmedabad – 380052, Gujarat</span></div>
-        <div class="fci"><span>📞</span><span>+91 9879160201</span></div>
-        <div class="fci"><span>✉️</span><span>quantum-kpo@gmail.com</span></div>
+        <div class="fci"><span>📞</span><span><a href="tel:+919879160201" style="color:inherit;text-decoration:none">+91 9879160201</a></span></div>
+        <div class="fci"><span>✉️</span><span><a href="mailto:quantum-kpo@gmail.com" style="color:inherit;text-decoration:none">quantum-kpo@gmail.com</a></span></div>
         <div class="fci"><span>🕐</span><span>Mon–Sat: 9am – 7pm IST</span></div>
       </div>
     </div>
   </div>
   <div class="foot-bottom">
     <span>© 2025 Quantum KPO Services Pvt. Ltd. All rights reserved.</span>
-    <div style="display:flex;gap:18px"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <div style="display:flex;gap:18px"><a href="#privacy-policy">Privacy Policy</a><a href="#terms-of-service">Terms of Service</a></div>
+  </div>
+  <div id="privacy-policy" style="max-width:900px;margin:32px auto 0;padding:0 5%;font-size:12px;color:var(--gray-500);line-height:1.6">
+    <strong style="color:var(--gray-300)">Privacy Policy:</strong> We collect contact details submitted via our forms solely to respond to enquiries and provide our services. We do not sell personal data. For data requests, email <a href="mailto:quantum-kpo@gmail.com" style="color:var(--blue-400)">quantum-kpo@gmail.com</a>.
+  </div>
+  <div id="terms-of-service" style="max-width:900px;margin:12px auto 0;padding:0 5% 24px;font-size:12px;color:var(--gray-500);line-height:1.6">
+    <strong style="color:var(--gray-300)">Terms of Service:</strong> Services are provided under agreed engagement terms. Quantum KPO Services Pvt. Ltd. delivers accounting support subject to client instruction, applicable UK regulations, and mutually agreed scope of work.
   </div>
 </footer>
 
