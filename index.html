@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum KPO Services — UK Accounting Outsourcing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<!-- EmailJS — needed for Book a Meeting email sending -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+:root {
+  --navy-950:#040D1E;--navy-900:#071428;--navy-800:#0D1E3E;--navy-700:#152B58;
+  --blue-500:#3B72F8;--blue-400:#5E8EFF;--teal-400:#00D4AA;--teal-300:#2AEFC9;
+  --white:#F0F6FF;--gray-300:#B8C5DC;--gray-500:#6A7FA3;--gray-700:#2E3E5C;
+  --grad:linear-gradient(135deg,#3B72F8 0%,#00D4AA 100%);
+  --grad-text:linear-gradient(135deg,#5E8EFF 0%,#2AEFC9 100%);
+  --glass:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1);
+  --fd:'Plus Jakarta Sans',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
+  --tr:0.3s cubic-bezier(0.4,0,0.2,1);--r:12px;--rl:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--navy-950);color:var(--white);line-height:1.6;overflow-x:hidden;font-size:16px;font-weight:300;letter-spacing:-0.01em}
+h1,h2,h3,h4,h5,h6{font-family:var(--fd);letter-spacing:-0.02em}
+p{font-weight:300}
+.hidden{display:none!important}
+.gt{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;background:rgba(59,114,248,0.15);border:1px solid rgba(59,114,248,0.3);color:var(--blue-400);font-size:13px;font-weight:500;letter-spacing:0.3px;text-transform:uppercase;margin-bottom:20px}
+.tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue-400)}
+
+/* NAVBAR */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,13,30,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);transition:background var(--tr)}
+.navbar.scrolled{background:rgba(4,13,30,0.96)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.logo-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:600;font-size:18px;color:white}
+.logo-text{font-family:var(--fd);font-weight:600;font-size:18px;color:var(--white)}
+.logo-text span{color:var(--teal-400)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:14px;font-weight:400;padding:8px 14px;border-radius:8px;transition:color var(--tr),background var(--tr);cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:var(--glass)}
+.nav-links a.active{color:var(--teal-400)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 22px;border-radius:10px;font-family:var(--fb);font-weight:400;font-size:14px;text-decoration:none;cursor:pointer;border:none;transition:all var(--tr);letter-spacing:-0.01em}
+.btn-primary{background:var(--grad);color:white;box-shadow:0 4px 20px rgba(59,114,248,0.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,114,248,0.5)}
+.btn-outline{background:transparent;border:1.5px solid var(--gb);color:var(--white)}
+.btn-outline:hover{background:var(--glass);border-color:var(--blue-400)}
+.btn-lg{padding:15px 32px;font-size:16px;border-radius:12px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;top:72px;left:0;right:0;z-index:999;background:rgba(4,13,30,0.97);backdrop-filter:blur(20px);padding:16px 5%;border-bottom:1px solid var(--gb);flex-direction:column;gap:4px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{color:var(--gray-300);text-decoration:none;font-size:16px;font-weight:400;padding:12px 16px;border-radius:10px;cursor:pointer;transition:all 0.2s}
+.mobile-nav a:hover,.mobile-nav a.active{color:var(--teal-400);background:rgba(0,212,170,0.1)}
+
+/* PAGE */
+.page{min-height:100vh;padding-top:72px;animation:fadeIn 0.5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+section{padding:80px 5%}
+.section-header{text-align:center;max-width:720px;margin:0 auto 64px}
+.section-header h2{font-size:clamp(30px,5vw,48px);font-weight:500;margin-bottom:16px;line-height:1.15;letter-spacing:-0.025em}
+.section-header p{color:var(--gray-300);font-size:17px;line-height:1.7;font-weight:300}
+
+/* HERO */
+.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 5%}
+#hero-canvas{position:absolute;inset:0;z-index:0}
+.glow-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.orb1{width:500px;height:500px;background:rgba(59,114,248,0.14);top:-120px;left:-80px}
+.orb2{width:350px;height:350px;background:rgba(0,212,170,0.09);bottom:-50px;right:10%}
+.hero-content{position:relative;z-index:2;max-width:700px}
+.hero h1{font-size:clamp(36px,5.5vw,64px);font-weight:200;line-height:1.1;margin-bottom:24px;letter-spacing:-0.025em}
+.hero p.lead{font-size:18px;color:var(--gray-300);max-width:560px;margin-bottom:40px;line-height:1.8;font-weight:300}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap}
+.hero-stat .num{font-size:34px;font-weight:500;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;letter-spacing:-0.02em}
+.hero-stat .lbl{font-size:13px;color:var(--gray-500);margin-top:4px;font-weight:300}
+.hero-card{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:2;background:var(--glass);backdrop-filter:blur(24px);border:1px solid var(--gb);border-radius:var(--rl);padding:28px;width:300px;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(-50%)}50%{transform:translateY(calc(-50% - 14px))}}
+.hero-card h3{font-size:15px;font-weight:500;margin-bottom:18px;color:var(--gray-300)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;background:rgba(59,114,248,0.12);border:1px solid rgba(59,114,248,0.2);border-radius:8px;font-size:12px;color:var(--blue-400);margin:3px;transition:all 0.2s;font-weight:400}
+.chip.t{background:rgba(0,212,170,0.12);border-color:rgba(0,212,170,0.2);color:var(--teal-400)}
+
+/* CLIENTS */
+.clients{padding:36px 5%;border-top:1px solid var(--gb);border-bottom:1px solid var(--gb)}
+.clients-inner{display:flex;align-items:center;gap:48px;flex-wrap:wrap}
+.clients-label{font-size:12px;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;flex-shrink:0;font-weight:400}
+.clients-logos{display:flex;gap:36px;flex-wrap:wrap;align-items:center}
+.cp{height:24px;background:rgba(255,255,255,0.1);border-radius:6px;opacity:0.45}
+
+/* CARDS */
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.grid-2c{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.scard{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:32px;transition:all var(--tr);cursor:pointer;position:relative;overflow:hidden}
+.scard::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
+.scard:hover{background:rgba(255,255,255,0.08);border-color:rgba(59,114,248,0.4);transform:translateY(-4px)}
+.scard:hover::before{transform:scaleX(1)}
+.s-icon{width:52px;height:52px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px;background:linear-gradient(135deg,rgba(59,114,248,0.2),rgba(0,212,170,0.2));border:1px solid rgba(59,114,248,0.2)}
+.scard h3{font-size:18px;font-weight:500;margin-bottom:12px;letter-spacing:-0.02em}
+.scard p{color:var(--gray-300);font-size:14px;line-height:1.65;font-weight:300}
+.card-arrow{display:inline-flex;align-items:center;gap:6px;margin-top:20px;color:var(--blue-400);font-size:14px;font-weight:400;opacity:0;transition:opacity var(--tr)}
+.scard:hover .card-arrow{opacity:1}
+
+/* WHY */
+.why-big{background:linear-gradient(135deg,rgba(59,114,248,0.15),rgba(0,212,170,0.1));border:1px solid rgba(59,114,248,0.2);border-radius:var(--rl);padding:40px;text-align:center}
+.why-big-num{font-size:80px;font-weight:200;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:-0.03em}
+.why-big-lbl{font-size:16px;color:var(--gray-300);margin-top:8px;font-weight:300}
+.why-smalls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.ws{background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);padding:18px;text-align:center}
+.ws .num{font-size:26px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em}
+.ws .lbl{font-size:12px;color:var(--gray-500);margin-top:4px;font-weight:300}
+.why-points{display:flex;flex-direction:column;gap:24px}
+.wpoint{display:flex;gap:20px;align-items:flex-start}
+.wpoint-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:linear-gradient(135deg,rgba(59,114,248,0.2),rgba(0,212,170,0.2));border:1px solid rgba(59,114,248,0.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.wpoint h4{font-size:16px;font-weight:500;margin-bottom:6px;letter-spacing:-0.02em}
+.wpoint p{font-size:14px;color:var(--gray-300);line-height:1.6;font-weight:300}
+
+/* PROCESS */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
+.proc-grid::before{content:'';position:absolute;top:36px;left:12%;width:76%;height:1px;background:linear-gradient(90deg,transparent,var(--blue-500),var(--teal-400),transparent)}
+.pstep{text-align:center;padding-top:8px}
+.pnum-wrap{width:72px;height:72px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:var(--navy-800)}
+.pnum-wrap::before{content:'';position:absolute;inset:-2px;border-radius:50%;background:var(--grad);z-index:-1}
+.pnum-wrap span{font-size:22px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pstep h4{font-size:15px;font-weight:500;margin-bottom:8px;letter-spacing:-0.02em}
+.pstep p{font-size:13px;color:var(--gray-500);line-height:1.6;font-weight:300}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,rgba(59,114,248,0.18) 0%,rgba(0,212,170,0.13) 100%);border:1px solid rgba(59,114,248,0.3);border-radius:var(--rl);padding:60px;text-align:center;position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(59,114,248,0.1) 0%,transparent 70%)}
+.cta-banner h2{font-size:clamp(26px,4vw,40px);font-weight:500;margin-bottom:16px;position:relative;letter-spacing:-0.025em}
+.cta-banner p{color:var(--gray-300);font-size:17px;margin-bottom:36px;position:relative;font-weight:300}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+
+/* ABOUT */
+.about-hero{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--rl);padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:72px;position:relative;overflow:hidden}
+.about-hero::before{content:'';position:absolute;right:-100px;top:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(59,114,248,0.14),transparent)}
+.about-hero h2{font-size:clamp(26px,4vw,40px);font-weight:500;line-height:1.2;margin-bottom:20px;letter-spacing:-0.025em}
+.about-hero p{color:var(--gray-300);font-size:15px;line-height:1.8;margin-bottom:14px;font-weight:300}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:72px}
+.mv-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:36px}
+.mv-card h3{font-size:22px;font-weight:500;margin-bottom:16px;letter-spacing:-0.02em}
+.mv-card p{color:var(--gray-300);font-size:15px;line-height:1.75;font-weight:300}
+.mv-card.mission{border-top:3px solid var(--blue-500)}
+.mv-card.vision{border-top:3px solid var(--teal-400)}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.val-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:28px;text-align:center;transition:all var(--tr)}
+.val-card:hover{transform:translateY(-4px);border-color:rgba(59,114,248,0.4)}
+.vi{font-size:36px;margin-bottom:14px}
+.val-card h4{font-size:16px;font-weight:500;margin-bottom:10px;letter-spacing:-0.02em}
+.val-card p{font-size:14px;color:var(--gray-300);line-height:1.6;font-weight:300}
+
+/* SERVICES PAGE */
+.svc-detail{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-bottom:64px}
+.sd-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:36px}
+.sd-card h3{font-size:24px;font-weight:500;margin-bottom:16px;letter-spacing:-0.025em}
+.sd-card p{color:var(--gray-300);font-size:15px;line-height:1.75;margin-bottom:24px;font-weight:300}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.feat-list li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--gray-300);font-weight:300}
+.feat-list li::before{content:'✓';flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(0,212,170,0.18);color:var(--teal-400);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;margin-top:1px}
+.sub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.sub-card{background:var(--navy-800);border:1px solid var(--gb);border-radius:var(--r);padding:18px;transition:all 0.2s}
+.sub-card:hover{border-color:rgba(59,114,248,0.4);transform:translateY(-2px)}
+.sub-card .ic{font-size:22px;margin-bottom:10px}
+.sub-card h5{font-size:13px;font-weight:500;margin-bottom:5px;letter-spacing:-0.01em}
+.sub-card p{font-size:12px;color:var(--gray-500);font-weight:300}
+
+/* CLIENTELE */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.ind-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:26px 18px;text-align:center;transition:all var(--tr);cursor:pointer}
+.ind-card:hover{background:rgba(255,255,255,0.08);border-color:rgba(59,114,248,0.4);transform:translateY(-4px)}
+.ind-card .ii{font-size:38px;margin-bottom:12px}
+.ind-card h4{font-size:14px;font-weight:500;margin-bottom:7px;letter-spacing:-0.01em}
+.ind-card p{font-size:12px;color:var(--gray-500);line-height:1.5;font-weight:300}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:48px;align-items:start}
+.contact-info h3{font-size:28px;font-weight:500;margin-bottom:14px;letter-spacing:-0.025em}
+.contact-info > p{color:var(--gray-300);font-size:15px;line-height:1.75;margin-bottom:36px;font-weight:300}
+.cdetails{display:flex;flex-direction:column;gap:20px}
+.citem{display:flex;gap:16px;align-items:flex-start}
+.citem-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:rgba(59,114,248,0.15);border:1px solid rgba(59,114,248,0.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.citem-text h5{font-weight:500;font-size:14px;margin-bottom:4px;letter-spacing:-0.01em}
+.citem-text p{font-size:14px;color:var(--gray-300);font-weight:300}
+.form-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:40px}
+.form-group{margin-bottom:18px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+label{display:block;font-size:12px;font-weight:500;color:var(--gray-500);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.5px}
+input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--gb);border-radius:9px;padding:12px 15px;color:var(--white);font-family:var(--fb);font-size:14px;font-weight:300;outline:none;transition:border-color 0.2s}
+input::placeholder,textarea::placeholder{color:var(--gray-700)}
+input:focus,textarea:focus,select:focus{border-color:var(--blue-500)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236A7FA3' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+select option{background:var(--navy-800);color:var(--white)}
+textarea{min-height:110px;resize:vertical}
+
+/* BOOKING */
+.booking-container{max-width:900px;margin:0 auto}
+.bk-steps{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;position:relative}
+.bk-steps::before{content:'';position:absolute;top:20px;left:10%;width:80%;height:1px;background:var(--gb);z-index:0}
+.bk-step{text-align:center;position:relative;z-index:2}
+.bk-num{width:40px;height:40px;border-radius:50%;background:var(--navy-800);border:2px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:400;margin:0 auto 8px;transition:all 0.3s}
+.bk-step.active .bk-num{background:var(--grad);border-color:transparent;color:white}
+.bk-step.done .bk-num{background:var(--teal-400);border-color:transparent;color:var(--navy-950)}
+.bk-lbl{font-size:12px;color:var(--gray-500);white-space:nowrap;font-weight:300}
+.bk-step.active .bk-lbl{color:var(--blue-400);font-weight:500}
+.bk-content{display:none}
+.bk-content.active{display:block;animation:fadeIn 0.4s ease}
+.cal-card{background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:30px;max-width:420px;margin:0 auto}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.cal-nav h3{font-size:18px;font-weight:500}
+.cal-btn{width:34px;height:34px;border-radius:8px;background:var(--glass);border:1px solid var(--gb);color:var(--white);cursor:pointer;font-size:16px;transition:all 0.2s}
+.cal-btn:hover{background:var(--navy-700)}
+.cal-dh{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-bottom:10px}
+.cal-dh span{font-size:12px;color:var(--gray-500);font-weight:500;padding:4px}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;cursor:pointer;transition:all 0.15s;background:none;border:none;color:var(--white);font-family:var(--fb);font-weight:300}
+.cal-day:hover:not(.empty):not(.past){background:rgba(59,114,248,0.2)}
+.cal-day.selected{background:var(--grad);color:white;font-weight:500}
+.cal-day.today{border:1px solid var(--blue-500)}
+.cal-day.empty,.cal-day.past{color:var(--gray-700);cursor:default}
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:22px auto 0}
+.tslot{padding:11px 6px;border:1px solid var(--gb);border-radius:9px;text-align:center;font-size:14px;font-weight:400;cursor:pointer;transition:all 0.2s;background:transparent;color:var(--white);font-family:var(--fb)}
+.tslot:hover:not(.na){border-color:var(--blue-500);color:var(--blue-400)}
+.tslot.selected{background:var(--grad);border-color:transparent;color:white}
+.tslot.na{opacity:0.3;cursor:not-allowed}
+
+/* FOOTER */
+footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5% 32px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:48px;margin-bottom:48px}
+.foot-brand p{color:var(--gray-500);font-size:14px;line-height:1.7;margin:16px 0 22px;max-width:260px;font-weight:300}
+.socials{display:flex;gap:10px}
+.social{width:34px;height:34px;border-radius:8px;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all 0.2s;text-decoration:none;color:var(--white);font-weight:400}
+.social:hover{background:rgba(59,114,248,0.2);border-color:var(--blue-500)}
+.foot-col h5{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--gray-500);margin-bottom:18px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-links li a{color:var(--gray-300);font-size:13px;text-decoration:none;cursor:pointer;transition:color 0.2s;font-weight:300}
+.foot-links li a:hover{color:var(--teal-400)}
+.foot-contact{display:flex;flex-direction:column;gap:11px}
+.fci{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--gray-300);font-weight:300}
+.foot-bottom{border-top:1px solid var(--gb);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--gray-500)}
+.foot-bottom a{color:var(--blue-400);text-decoration:none}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}.rd4{transition-delay:0.4s}
+
+/* SUCCESS */
+.succ{background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.3);border-radius:var(--r);padding:16px 18px;color:var(--teal-400);font-size:14px;display:flex;align-items:center;gap:10px;margin-top:16px;font-weight:300}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy-800);border:1px solid rgba(0,212,170,0.3);border-radius:var(--r);padding:14px 20px;color:var(--teal-400);font-size:13px;font-weight:400;z-index:9999;display:flex;align-items:center;gap:10px;animation:slideUp 0.3s ease;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.bg-alt{background:var(--navy-900)}
+.sep{height:1px;background:var(--gb);margin:64px 0}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .nav-links,.btn-nav-cta{display:none}
+  .hamburger{display:flex}
+  .grid-2,.contact-grid,.svc-detail,.about-hero{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .val-grid{grid-template-columns:1fr 1fr}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proc-grid::before{display:none}
+  .mv-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  section{padding:56px 5%}
+  .ind-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .hero-stats{gap:22px}
+  .why-smalls{grid-template-columns:1fr 1fr}
+  .val-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .time-slots{grid-template-columns:repeat(2,1fr)}
+  .cta-banner{padding:36px 22px}
+  .about-hero{padding:28px}
+  .foot-bottom{flex-direction:column;gap:8px;text-align:center}
+  .bk-step .bk-lbl{display:none}
+  .svc-detail{grid-template-columns:1fr!important;direction:ltr!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="logo" onclick="nav('home')">
+    <div class="logo-icon">Q</div>
+    <div class="logo-text">Quantum<span>KPO</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="nav('home')" class="active" data-p="home">Home</a></li>
+    <li><a onclick="nav('about')" data-p="about">About Us</a></li>
+    <li><a onclick="nav('services')" data-p="services">Services</a></li>
+    <li><a onclick="nav('clientele')" data-p="clientele">Clientele</a></li>
+    <li><a onclick="nav('contact')" data-p="contact">Contact Us</a></li>
+  </ul>
+  <button class="btn btn-primary btn-nav-cta" onclick="nav('book')">📅 Book a Meeting</button>
+  <button class="hamburger" id="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav" id="mobNav">
+  <a onclick="nav('home');toggleMob()" data-p="home">🏠 Home</a>
+  <a onclick="nav('about');toggleMob()" data-p="about">🏢 About Us</a>
+  <a onclick="nav('services');toggleMob()" data-p="services">⚙️ Services</a>
+  <a onclick="nav('clientele');toggleMob()" data-p="clientele">👥 Clientele</a>
+  <a onclick="nav('contact');toggleMob()" data-p="contact">📬 Contact</a>
+  <a onclick="nav('book');toggleMob()" style="color:var(--teal-400)">📅 Book a Meeting</a>
+</div>
+
+<!-- ==================== HOME ==================== -->
+<div id="pg-home" class="page">
+
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="hero-content">
+      <div class="tag">UK Accounting KPO Specialists</div>
+      <h1>Expert UK Accounting Support, <span class="gt">Delivered from India</span></h1>
+      <p class="lead">Quantum KPO provides dedicated UK accounting outsourcing — bookkeeping, payroll, VAT, self assessment, and more — helping UK accounting firms and businesses stay compliant, reduce costs, and scale with confidence.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" onclick="nav('services')">Explore Our Services</button>
+        <button class="btn btn-outline btn-lg" onclick="nav('book')">Book Free Consultation</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num" data-count="150">0</span><span class="lbl">+ UK Clients</span></div>
+        <div class="hero-stat"><span class="num" data-count="8">0</span><span class="lbl">+ Years Experience</span></div>
+        <div class="hero-stat"><span class="num" data-count="99">0</span><span class="lbl">% Accuracy Rate</span></div>
+        <div class="hero-stat"><span class="num" data-count="25">0</span><span class="lbl">+ Accounting Experts</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Our Core Services</h3>
+      <span class="chip">📊 Bookkeeping</span>
+      <span class="chip t">💷 Payroll</span>
+      <span class="chip">📋 VAT Returns</span>
+      <span class="chip t">🧾 Self Assessment</span>
+      <span class="chip">🏢 Corporation Tax</span>
+      <span class="chip t">📁 Year-End Accounts</span>
+    </div>
+  </section>
+
+  <div class="clients">
+    <div class="clients-inner">
+      <span class="clients-label">Trusted by UK Businesses</span>
+      <div class="clients-logos">
+        <div class="cp" style="width:88px"></div><div class="cp" style="width:68px"></div>
+        <div class="cp" style="width:108px"></div><div class="cp" style="width:82px"></div>
+        <div class="cp" style="width:94px"></div><div class="cp" style="width:72px"></div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-header reveal">
+      <div class="tag">What We Do</div>
+      <h2>Complete <span class="gt">UK Accounting Services</span> for Every Business</h2>
+      <p>From day-to-day bookkeeping to year-end accounts and HMRC submissions, our expert UK-trained accounting team handles it all — so you can focus on growing your business.</p>
+    </div>
+    <div class="grid-4">
+      <div class="scard reveal rd1" onclick="nav('services')"><div class="s-icon">📊</div><h3>Bookkeeping</h3><p>Accurate day-to-day bookkeeping, bank reconciliations, and ledger management on Xero, QuickBooks, or Sage.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd2" onclick="nav('services')"><div class="s-icon">💷</div><h3>Payroll Processing</h3><p>Full UK payroll management, RTI submissions to HMRC, pension auto-enrolment, and P60/P45/P11D preparation.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd3" onclick="nav('services')"><div class="s-icon">📋</div><h3>VAT Returns</h3><p>VAT return preparation and submission, Making Tax Digital (MTD) compliance, and VAT registration support.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd4" onclick="nav('services')"><div class="s-icon">🧾</div><h3>Self Assessment</h3><p>Personal tax returns for individuals, sole traders, directors, landlords, and high earners — accurately filed on time.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd1" onclick="nav('services')"><div class="s-icon">🏢</div><h3>Corporation Tax</h3><p>CT600 preparation and filing for limited companies, with full tax computation and deferred tax calculations.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd2" onclick="nav('services')"><div class="s-icon">📁</div><h3>Year-End Accounts</h3><p>Statutory year-end accounts for sole traders, partnerships, and limited companies with Companies House filing support.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd3" onclick="nav('services')"><div class="s-icon">📈</div><h3>Management Accounts</h3><p>Monthly or quarterly management accounts, budget vs actual analysis, cash flow forecasting, and KPI dashboards.</p><span class="card-arrow">Learn more →</span></div>
+      <div class="scard reveal rd4" onclick="nav('services')"><div class="s-icon">💼</div><h3>Credit Control</h3><p>Accounts receivable management, debtor chasing, aged creditor reports, and cash flow support to keep you paid on time.</p><span class="card-arrow">Learn more →</span></div>
+    </div>
+  </section>
+
+  <section class="bg-alt">
+    <div class="section-header reveal">
+      <div class="tag">Why Quantum KPO</div>
+      <h2>The <span class="gt">Quantum Advantage</span> — Why We're Different</h2>
+      <p>We're not just another outsourcing firm. We're a dedicated UK accounting support partner with deep HMRC expertise, cloud accounting proficiency, and a commitment to quality that never wavers.</p>
+    </div>
+    <div class="grid-2">
+      <div class="reveal">
+        <div class="why-big">
+          <div class="why-big-num">8+</div>
+          <div class="why-big-lbl">Years Supporting UK Accounting Firms</div>
+        </div>
+        <div class="why-smalls">
+          <div class="ws"><div class="num">150+</div><div class="lbl">UK Clients</div></div>
+          <div class="ws"><div class="num">25+</div><div class="lbl">Expert Staff</div></div>
+          <div class="ws"><div class="num">99%</div><div class="lbl">Accuracy Rate</div></div>
+          <div class="ws"><div class="num">48hr</div><div class="lbl">Turnaround</div></div>
+        </div>
+      </div>
+      <div class="why-points reveal">
+        <div class="wpoint"><div class="wpoint-icon">🎯</div><div><h4>UK Accounting Specialists</h4><p>Our team is trained specifically in UK accounting standards, HMRC requirements, MTD compliance, and cloud platforms like Xero, QuickBooks, and Sage.</p></div></div>
+        <div class="wpoint"><div class="wpoint-icon">🔒</div><div><h4>Secure & Confidential</h4><p>Your client data is handled with enterprise-grade security, strict NDAs, and full GDPR compliance. We treat every file as if it were our own.</p></div></div>
+        <div class="wpoint"><div class="wpoint-icon">📐</div><div><h4>Flexible Engagement Models</h4><p>Whether you need support for one client or an entire portfolio — hourly, fixed-fee, or dedicated team structures that flex to your practice's needs.</p></div></div>
+        <div class="wpoint"><div class="wpoint-icon">⚡</div><div><h4>Fast Turnaround Times</h4><p>We work to your deadlines, not ours. With a dedicated team aligned to UK business hours, you get reliable delivery when it matters most.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header reveal">
+      <div class="tag">How We Work</div>
+      <h2>A Seamless <span class="gt">4-Step Process</span> to Partnership</h2>
+      <p>Our proven onboarding process ensures you see value quickly, consistently, and without friction.</p>
+    </div>
+    <div class="proc-grid reveal">
+      <div class="pstep"><div class="pnum-wrap"><span>01</span></div><h4>Discovery Call</h4><p>We understand your practice, your clients, and your specific requirements to design the right engagement model for you.</p></div>
+      <div class="pstep"><div class="pnum-wrap"><span>02</span></div><h4>Team Onboarding</h4><p>Dedicated accountants assigned, software access configured, and workflows agreed — up and running within days.</p></div>
+      <div class="pstep"><div class="pnum-wrap"><span>03</span></div><h4>Delivery & Review</h4><p>Work completed to your standards with multi-stage QA checks, delivered on time and ready for your sign-off.</p></div>
+      <div class="pstep"><div class="pnum-wrap"><span>04</span></div><h4>Scale & Optimise</h4><p>Regular reviews, process improvements, and flexible capacity scaling to grow alongside your practice.</p></div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:100px">
+    <div class="cta-banner reveal">
+      <h2>Ready to Reduce Your <span class="gt">Accounting Overhead?</span></h2>
+      <p>Join 150+ UK businesses and accounting firms that trust Quantum KPO for reliable, accurate, and cost-effective accounting support.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary btn-lg" onclick="nav('book')">📅 Book a Free Consultation</button>
+        <button class="btn btn-outline btn-lg" onclick="nav('contact')">💬 Talk to Our Team</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ABOUT ==================== -->
+<div id="pg-about" class="page hidden">
+  <section>
+    <div class="tag">Our Story</div>
+    <div class="about-hero reveal">
+      <div>
+        <h2>Built on <span class="gt">Expertise</span>, Driven by <span class="gt">Integrity</span></h2>
+        <p>Quantum KPO Services was founded with one clear purpose: to give UK accounting firms and businesses access to a reliable, expert accounting team in India — delivering the same quality of work as an in-house team, at a fraction of the cost.</p>
+        <p>We specialise exclusively in UK accounting, which means our entire team is trained on UK tax law, HMRC regulations, Making Tax Digital, and the major cloud accounting platforms used by UK practices. This focus is what sets us apart.</p>
+        <p>Our team of 25+ qualified accountants and bookkeepers brings deep expertise across all areas of UK accounting — from simple bookkeeping to complex corporation tax computations — backed by rigorous quality processes and a personal approach to every client relationship.</p>
+        <button class="btn btn-primary" onclick="nav('book')" style="margin-top:20px">Schedule a Discovery Call →</button>
+      </div>
+      <div>
+        <div style="background:var(--grad);border-radius:var(--rl);padding:36px;color:white">
+          <h3 style="font-size:20px;font-weight:500;margin-bottom:22px;letter-spacing:-0.02em">Our Core Commitments</h3>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;flex-shrink:0">✦</span><div><strong style="display:block;margin-bottom:4px;font-size:15px;font-weight:500">99%+ Accuracy Guaranteed</strong><span style="font-size:13px;opacity:0.85;font-weight:300">Multi-layer QA on every submission, backed by clear SLAs.</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;flex-shrink:0">✦</span><div><strong style="display:block;margin-bottom:4px;font-size:15px;font-weight:500">GDPR & Data Security</strong><span style="font-size:13px;opacity:0.85;font-weight:300">Enterprise-grade data protection, strict NDAs, and full GDPR compliance.</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;flex-shrink:0">✦</span><div><strong style="display:block;margin-bottom:4px;font-size:15px;font-weight:500">UK Business Hours Aligned</strong><span style="font-size:13px;opacity:0.85;font-weight:300">Our team operates in sync with UK time zones for seamless communication.</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;flex-shrink:0">✦</span><div><strong style="display:block;margin-bottom:4px;font-size:15px;font-weight:500">Flexible Engagement Models</strong><span style="font-size:13px;opacity:0.85;font-weight:300">Per-client, hourly, fixed monthly, or dedicated team structures.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mv-grid reveal">
+      <div class="mv-card mission">
+        <h3>🎯 Our Mission</h3>
+        <p>To empower UK accounting firms and businesses with reliable, high-quality accounting outsourcing — combining skilled professionals, deep UK regulatory expertise, and a genuine partnership approach that delivers measurable value every engagement.</p>
+      </div>
+      <div class="mv-card vision">
+        <h3>🚀 Our Vision</h3>
+        <p>To be the UK's most trusted accounting outsourcing partner — recognised for our accuracy, reliability, and ability to transform the way UK accountants and businesses manage their financial operations.</p>
+      </div>
+    </div>
+
+    <div class="section-header reveal" style="margin-top:20px">
+      <div class="tag">Core Values</div>
+      <h2>The <span class="gt">Principles</span> That Guide Everything We Do</h2>
+    </div>
+    <div class="val-grid reveal">
+      <div class="val-card"><div class="vi">🎯</div><h4>Accuracy First</h4><p>Every figure, every return, every submission undergoes rigorous multi-stage QA. We're obsessive about precision because your clients depend on it.</p></div>
+      <div class="val-card"><div class="vi">🤝</div><h4>True Partnership</h4><p>We deeply understand your practice, align with your workflows, and act as a genuine extension of your team — not just a back-office supplier.</p></div>
+      <div class="val-card"><div class="vi">🔒</div><h4>Uncompromising Integrity</h4><p>Honesty, transparency, and confidentiality in everything we do. We treat your clients' data with the highest respect, always.</p></div>
+      <div class="val-card"><div class="vi">💡</div><h4>Continuous Improvement</h4><p>We invest in the latest UK accounting tools, HMRC updates, and ongoing training to stay ahead of regulatory changes for you.</p></div>
+      <div class="val-card"><div class="vi">📈</div><h4>Scalable Excellence</h4><p>From one client to one hundred, quality never diminishes as your portfolio grows. True scale without compromise.</p></div>
+      <div class="val-card"><div class="vi">🌍</div><h4>UK-Focused Mindset</h4><p>Our entire operation is oriented around UK accounting standards, HMRC compliance, and the nuances of the UK business landscape.</p></div>
+    </div>
+
+    <div class="cta-banner reveal" style="margin-top:72px">
+      <h2>Want to Know More? <span class="gt">Let's Connect.</span></h2>
+      <p>Speak with our team to learn how Quantum KPO can become your most trusted accounting partner.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary btn-lg" onclick="nav('book')">Book a Consultation</button>
+        <button class="btn btn-outline btn-lg" onclick="nav('contact')">Contact Us</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== SERVICES ==================== -->
+<div id="pg-services" class="page hidden">
+  <section>
+    <div class="section-header reveal">
+      <div class="tag">Our Services</div>
+      <h2>Specialist <span class="gt">UK Accounting Services</span> — End to End</h2>
+      <p>A comprehensive suite of UK accounting outsourcing services, each delivered by specialists trained in UK tax law, HMRC requirements, and cloud accounting platforms. Accurate, reliable, and always on time.</p>
+    </div>
+
+    <!-- Bookkeeping & Accounts -->
+    <div class="svc-detail reveal">
+      <div class="sd-card">
+        <div style="font-size:40px;margin-bottom:14px">📊</div>
+        <h3>Bookkeeping & Accounts</h3>
+        <p>Accurate, timely bookkeeping is the foundation of every healthy business. Our bookkeepers manage your day-to-day financial records on Xero, QuickBooks, Sage, or FreeAgent — keeping you reconciled, up-to-date, and ready for any deadline.</p>
+        <ul class="feat-list">
+          <li>Bank and credit card reconciliations</li>
+          <li>Sales and purchase ledger management</li>
+          <li>Supplier invoice processing and coding</li>
+          <li>Aged debtor and creditor reporting</li>
+          <li>Cloud accounting setup and migration (Xero, QuickBooks, Sage)</li>
+          <li>Regular financial reporting and trial balance preparation</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px" onclick="nav('book')">Get Started →</button>
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="ic">🏦</div><h5>Bank Reconciliation</h5><p>Daily and monthly bank reconciliations across all accounts</p></div>
+        <div class="sub-card"><div class="ic">📥</div><h5>Sales Ledger</h5><p>Invoice raising, posting, and receipts management</p></div>
+        <div class="sub-card"><div class="ic">📤</div><h5>Purchase Ledger</h5><p>Supplier invoice coding, posting, and payment runs</p></div>
+        <div class="sub-card"><div class="ic">☁️</div><h5>Cloud Accounting</h5><p>Xero, QuickBooks, Sage, and FreeAgent setup and management</p></div>
+        <div class="sub-card"><div class="ic">📉</div><h5>Aged Creditors</h5><p>Aged debtor and creditor reports for cash flow visibility</p></div>
+        <div class="sub-card"><div class="ic">📋</div><h5>Trial Balance</h5><p>Month-end trial balance and reporting pack preparation</p></div>
+      </div>
+    </div>
+
+    <!-- Payroll -->
+    <div class="svc-detail reveal" style="direction:rtl">
+      <div class="sd-card" style="direction:ltr">
+        <div style="font-size:40px;margin-bottom:14px">💷</div>
+        <h3>Payroll Processing & RTI</h3>
+        <p>Full-service UK payroll processing for businesses of all sizes. We handle every aspect of your payroll cycle — from calculating gross pay and deductions to RTI submissions, pension auto-enrolment, and statutory reporting — all PAYE compliant.</p>
+        <ul class="feat-list">
+          <li>Weekly, fortnightly, and monthly payroll processing</li>
+          <li>RTI submissions to HMRC (FPS and EPS)</li>
+          <li>Pension auto-enrolment and contribution management</li>
+          <li>P60, P45, and P11D preparation and distribution</li>
+          <li>CIS (Construction Industry Scheme) returns and deduction statements</li>
+          <li>Statutory pay calculations (SSP, SMP, SPP, ShPP)</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px" onclick="nav('book')">Get Started →</button>
+      </div>
+      <div class="sub-grid" style="direction:ltr">
+        <div class="sub-card"><div class="ic">📡</div><h5>RTI Submissions</h5><p>FPS and EPS submissions to HMRC every pay period</p></div>
+        <div class="sub-card"><div class="ic">🏦</div><h5>Auto-Enrolment</h5><p>Pension staging, contributions, and re-enrolment management</p></div>
+        <div class="sub-card"><div class="ic">📄</div><h5>P60 / P45 / P11D</h5><p>Year-end documents prepared and issued on time</p></div>
+        <div class="sub-card"><div class="ic">🏗️</div><h5>CIS Returns</h5><p>CIS monthly returns and subcontractor deduction statements</p></div>
+        <div class="sub-card"><div class="ic">🤒</div><h5>Statutory Pay</h5><p>SSP, SMP, SPP and other statutory payment calculations</p></div>
+        <div class="sub-card"><div class="ic">📊</div><h5>PAYE Management</h5><p>PAYE tax and NI calculations with full audit trail</p></div>
+      </div>
+    </div>
+
+    <!-- Tax Returns -->
+    <div class="svc-detail reveal">
+      <div class="sd-card">
+        <div style="font-size:40px;margin-bottom:14px">🧾</div>
+        <h3>VAT, Self Assessment & Corporation Tax</h3>
+        <p>From MTD-compliant VAT returns to personal self assessments and CT600 filings, our tax team handles every return with accuracy, on time, and in full compliance with HMRC requirements. Never miss a deadline again.</p>
+        <ul class="feat-list">
+          <li>VAT return preparation and submission (standard, flat rate, cash accounting)</li>
+          <li>Making Tax Digital (MTD) compliance and bridging software support</li>
+          <li>Self Assessment returns for individuals, sole traders, landlords, and directors</li>
+          <li>Corporation Tax (CT600) computation and filing</li>
+          <li>Capital gains tax calculations and reporting</li>
+          <li>HMRC correspondence management and enquiry support</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px" onclick="nav('book')">Get Started →</button>
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="ic">📋</div><h5>VAT Returns</h5><p>All VAT schemes — standard, flat rate, cash, retail, margin</p></div>
+        <div class="sub-card"><div class="ic">💻</div><h5>MTD Compliance</h5><p>Making Tax Digital for VAT and Income Tax support</p></div>
+        <div class="sub-card"><div class="ic">🧾</div><h5>Self Assessment</h5><p>SA100 returns for individuals, landlords, directors, and partners</p></div>
+        <div class="sub-card"><div class="ic">🏢</div><h5>CT600 Filing</h5><p>Corporation Tax returns with full tax computation schedules</p></div>
+        <div class="sub-card"><div class="ic">📈</div><h5>Capital Gains</h5><p>CGT calculations for shares, property, and other assets</p></div>
+        <div class="sub-card"><div class="ic">📬</div><h5>HMRC Liaison</h5><p>Correspondence handling and tax enquiry support</p></div>
+      </div>
+    </div>
+
+    <!-- Management & Year-End -->
+    <div class="svc-detail reveal" style="direction:rtl">
+      <div class="sd-card" style="direction:ltr">
+        <div style="font-size:40px;margin-bottom:14px">📁</div>
+        <h3>Management & Year-End Accounts</h3>
+        <p>Give your clients the financial visibility they need to make great decisions. We prepare clear, insightful management accounts and fully compliant year-end statutory accounts — ready for your review and sign-off, or direct submission to Companies House.</p>
+        <ul class="feat-list">
+          <li>Monthly and quarterly management accounts</li>
+          <li>Budget vs actual variance analysis and commentary</li>
+          <li>Year-end statutory accounts for sole traders, partnerships, and limited companies</li>
+          <li>Companies House filing support (micro-entity and full accounts)</li>
+          <li>Cash flow forecasting and working capital analysis</li>
+          <li>KPI dashboards and bespoke financial reporting</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px" onclick="nav('book')">Get Started →</button>
+      </div>
+      <div class="sub-grid" style="direction:ltr">
+        <div class="sub-card"><div class="ic">📈</div><h5>Management Accounts</h5><p>Monthly P&L, balance sheet, and narrative commentary</p></div>
+        <div class="sub-card"><div class="ic">📊</div><h5>Budget Analysis</h5><p>Budget vs actual with variance analysis and KPIs</p></div>
+        <div class="sub-card"><div class="ic">📑</div><h5>Statutory Accounts</h5><p>FRS 102, FRS 105 compliant year-end accounts preparation</p></div>
+        <div class="sub-card"><div class="ic">🏛️</div><h5>Companies House</h5><p>Micro-entity and full statutory accounts filing support</p></div>
+        <div class="sub-card"><div class="ic">💰</div><h5>Cash Flow Forecast</h5><p>13-week and annual cash flow forecasting models</p></div>
+        <div class="sub-card"><div class="ic">🎯</div><h5>KPI Reporting</h5><p>Bespoke financial dashboards and management reporting packs</p></div>
+      </div>
+    </div>
+
+    <div class="cta-banner reveal" style="margin-top:40px">
+      <h2>Need a Custom Solution? <span class="gt">Let's Talk.</span></h2>
+      <p>Every practice is different. Book a discovery call and we'll design a solution specifically around your workflows and client base.</p>
+      <div class="cta-btns"><button class="btn btn-primary btn-lg" onclick="nav('book')">Schedule Discovery Call</button></div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== CLIENTELE ==================== -->
+<div id="pg-clientele" class="page hidden">
+  <section>
+    <div class="section-header reveal">
+      <div class="tag">Who We Work With</div>
+      <h2>Accounting Expertise for <span class="gt">Every Sector</span></h2>
+      <p>Our team has hands-on experience supporting businesses and accounting practices across the UK's most diverse sectors — because great accounting isn't generic, it's industry-aware.</p>
+    </div>
+    <div class="ind-grid reveal">
+      <div class="ind-card"><div class="ii">🏥</div><h4>Care Sector</h4><p>Care homes, domiciliary care providers, nursing agencies, and supported living organisations</p></div>
+      <div class="ind-card"><div class="ii">💊</div><h4>Pharma & Healthcare</h4><p>Pharmaceutical companies, GP practices, dental clinics, opticians, and private health providers</p></div>
+      <div class="ind-card"><div class="ii">🛒</div><h4>Retail & E-commerce</h4><p>High street retailers, Amazon and eBay sellers, D2C brands, and marketplace operators</p></div>
+      <div class="ind-card"><div class="ii">🏨</div><h4>Hotels & Accommodation</h4><p>Independent hotels, B&amp;Bs, guest houses, Airbnb operators, and serviced apartments</p></div>
+      <div class="ind-card"><div class="ii">🍺</div><h4>Pubs &amp; Restaurants</h4><p>Pubs, restaurants, cafés, takeaways, fast food chains, and food delivery businesses</p></div>
+      <div class="ind-card"><div class="ii">🏗️</div><h4>Builders &amp; Construction</h4><p>Building contractors, plumbers, electricians, roofers, joiners, and CIS subcontractors</p></div>
+      <div class="ind-card"><div class="ii">👨‍⚕️</div><h4>Doctors &amp; Consultants</h4><p>Private practitioners, medical consultants, aesthetics clinics, physiotherapists, and therapists</p></div>
+      <div class="ind-card"><div class="ii">👔</div><h4>Recruitment Agencies</h4><p>Staffing agencies, IT recruiters, hospitality recruiters, and umbrella companies</p></div>
+      <div class="ind-card"><div class="ii">💻</div><h4>IT &amp; Technology</h4><p>SaaS companies, app developers, IT consultancies, and freelance developers</p></div>
+      <div class="ind-card"><div class="ii">⚖️</div><h4>Solicitors &amp; Legal</h4><p>Law firms, solicitors, conveyancing practices, barristers, and legal consultants</p></div>
+      <div class="ind-card"><div class="ii">🏠</div><h4>Estate Agents &amp; Property</h4><p>Estate agents, letting agents, property developers, buy-to-let landlords</p></div>
+      <div class="ind-card"><div class="ii">🎗️</div><h4>Charities &amp; Non-profits</h4><p>Registered charities, social enterprises, community interest companies, and trusts</p></div>
+      <div class="ind-card"><div class="ii">🚚</div><h4>Logistics &amp; Transport</h4><p>Haulage companies, couriers, taxi and private hire firms, and freight operators</p></div>
+      <div class="ind-card"><div class="ii">💇</div><h4>Personal Services</h4><p>Hair salons, beauty therapists, spas, personal trainers, life coaches, and freelancers</p></div>
+    </div>
+
+    <div class="section-header reveal" style="margin-top:80px">
+      <div class="tag">Client Voice</div>
+      <h2>Real Results, <span class="gt">Real Impact</span></h2>
+      <p>Here's what our clients say about working with Quantum KPO.</p>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="scard">
+        <div style="font-size:30px;margin-bottom:14px;color:var(--teal-400)">❝</div>
+        <p style="font-size:14px;line-height:1.75;margin-bottom:18px;color:var(--gray-300);font-weight:300">Quantum KPO manages bookkeeping and VAT returns for over 30 of our clients. The quality is exceptional and our team now has the capacity to take on 40% more clients without hiring.</p>
+        <div style="display:flex;gap:12px;align-items:center"><div style="width:38px;height:38px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13px;flex-shrink:0">JH</div><div><div style="font-weight:500;font-size:13px">James Harrison</div><div style="font-size:12px;color:var(--gray-500);font-weight:300">Director, Harrison Accountants, Leeds</div></div></div>
+      </div>
+      <div class="scard">
+        <div style="font-size:30px;margin-bottom:14px;color:var(--teal-400)">❝</div>
+        <p style="font-size:14px;line-height:1.75;margin-bottom:18px;color:var(--gray-300);font-weight:300">Our self assessment season used to be a nightmare. Since partnering with Quantum KPO, we cleared our entire backlog in three weeks and have never missed an HMRC deadline since.</p>
+        <div style="display:flex;gap:12px;align-items:center"><div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--teal-400),var(--blue-500));display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13px;flex-shrink:0">SC</div><div><div style="font-weight:500;font-size:13px">Sarah Collins</div><div style="font-size:12px;color:var(--gray-500);font-weight:300">Practice Manager, Collins & Co, Manchester</div></div></div>
+      </div>
+      <div class="scard">
+        <div style="font-size:30px;margin-bottom:14px;color:var(--teal-400)">❝</div>
+        <p style="font-size:14px;line-height:1.75;margin-bottom:18px;color:var(--gray-300);font-weight:300">As a care home operator running five sites, payroll and bookkeeping were consuming us. Quantum KPO handles everything accurately, every month — it's been genuinely transformative.</p>
+        <div style="display:flex;gap:12px;align-items:center"><div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#a855f7,var(--blue-500));display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13px;flex-shrink:0">RP</div><div><div style="font-weight:500;font-size:13px">Rachel Patel</div><div style="font-size:12px;color:var(--gray-500);font-weight:300">MD, Sunrise Care Group, Birmingham</div></div></div>
+      </div>
+    </div>
+
+    <div class="cta-banner reveal" style="margin-top:64px">
+      <h2>Your Sector Here? <span class="gt">Let's Get Started.</span></h2>
+      <p>Whatever your industry, if you need expert UK accounting support done with accuracy and reliability, Quantum KPO is ready to help.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary btn-lg" onclick="nav('book')">Book a Free Consultation</button>
+        <button class="btn btn-outline btn-lg" onclick="nav('contact')">Send Us a Message</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div id="pg-contact" class="page hidden">
+  <section>
+    <div class="section-header reveal">
+      <div class="tag">Get in Touch</div>
+      <h2>Let's Start a <span class="gt">Conversation</span></h2>
+      <p>Have a question or want to explore how Quantum KPO can support your practice or business? Reach out — we typically respond within 4 business hours.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>We'd Love to Hear from You</h3>
+        <p>Whether you need a custom accounting outsourcing solution, want to discuss a specific service, or simply want more information — we're here and ready to help.</p>
+        <div class="cdetails">
+          <div class="citem"><div class="citem-icon">📍</div><div class="citem-text"><h5>Head Office</h5><p>514, Nobles Trade Centre<br>Opp. B D Rao Hall, Bhuyangdev Cross Road<br>Memnagar, Ahmedabad – 380052, Gujarat, India</p></div></div>
+          <div class="citem"><div class="citem-icon">📞</div><div class="citem-text"><h5>Phone</h5><p>+91 9879160201</p></div></div>
+          <div class="citem"><div class="citem-icon">✉️</div><div class="citem-text"><h5>Email</h5><p>quantum-kpo@gmail.com</p></div></div>
+          <div class="citem"><div class="citem-icon">🕐</div><div class="citem-text"><h5>Business Hours</h5><p>Monday – Saturday: 9:00 AM – 7:00 PM IST<br>Aligned with UK business hours</p></div></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3 style="font-size:20px;font-weight:500;margin-bottom:22px;letter-spacing:-0.02em">Send Us a Message</h3>
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" placeholder="John" required></div>
+            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="john@yourfirm.co.uk" required></div>
+          <div class="form-group"><label>Company / Practice Name</label><input type="text" placeholder="Your Accountancy Firm Ltd."></div>
+          <div class="form-group"><label>Service of Interest</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>Bookkeeping & Accounts</option>
+              <option>Payroll Processing & RTI</option>
+              <option>VAT Returns</option>
+              <option>Self Assessment Returns</option>
+              <option>Corporation Tax (CT600)</option>
+              <option>Year-End Accounts</option>
+              <option>Management Accounts</option>
+              <option>Credit Control</option>
+              <option>Multiple / Full Service</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Your Message</label><textarea placeholder="Tell us about your requirements, volume of work, software you use, or any questions you have..."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">Send Message →</button>
+        </form>
+        <div id="csucc" style="display:none" class="succ">✅ Your message has been sent! We'll be in touch within 4 business hours.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== BOOK MEETING ==================== -->
+<div id="pg-book" class="page hidden">
+  <section>
+    <div class="section-header reveal">
+      <div class="tag">Schedule a Meeting</div>
+      <h2>Book Your <span class="gt">Free Consultation</span></h2>
+      <p>Speak directly with our UK accounting specialists — no obligation, no pressure. Just a focused conversation about your needs and how we can help.</p>
+    </div>
+
+    <div class="booking-container">
+      <div class="bk-steps" id="bkSteps">
+        <div class="bk-step active" data-s="1"><div class="bk-num">1</div><div class="bk-lbl">Select Service</div></div>
+        <div class="bk-step" data-s="2"><div class="bk-num">2</div><div class="bk-lbl">Pick Date</div></div>
+        <div class="bk-step" data-s="3"><div class="bk-num">3</div><div class="bk-lbl">Choose Time</div></div>
+        <div class="bk-step" data-s="4"><div class="bk-num">4</div><div class="bk-lbl">Your Details</div></div>
+        <div class="bk-step" data-s="5"><div class="bk-num">5</div><div class="bk-lbl">Confirm</div></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="bk-content active" id="bs-1">
+        <div class="section-header" style="margin-bottom:32px"><h2 style="font-size:24px">What would you like to discuss?</h2><p>Select the service area most relevant to your enquiry</p></div>
+        <div class="grid-4" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+          <div class="scard" onclick="selSvc(this,'Bookkeeping & Accounts')"><div class="s-icon">📊</div><h3 style="font-size:15px">Bookkeeping</h3></div>
+          <div class="scard" onclick="selSvc(this,'Payroll Processing & RTI')"><div class="s-icon">💷</div><h3 style="font-size:15px">Payroll</h3></div>
+          <div class="scard" onclick="selSvc(this,'VAT Returns')"><div class="s-icon">📋</div><h3 style="font-size:15px">VAT Returns</h3></div>
+          <div class="scard" onclick="selSvc(this,'Self Assessment')"><div class="s-icon">🧾</div><h3 style="font-size:15px">Self Assessment</h3></div>
+          <div class="scard" onclick="selSvc(this,'Corporation Tax (CT600)')"><div class="s-icon">🏢</div><h3 style="font-size:15px">Corporation Tax</h3></div>
+          <div class="scard" onclick="selSvc(this,'Year-End Accounts')"><div class="s-icon">📁</div><h3 style="font-size:15px">Year-End Accounts</h3></div>
+          <div class="scard" onclick="selSvc(this,'Management Accounts')"><div class="s-icon">📈</div><h3 style="font-size:15px">Management Accounts</h3></div>
+          <div class="scard" onclick="selSvc(this,'General Enquiry')"><div class="s-icon">💬</div><h3 style="font-size:15px">General Enquiry</h3></div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bk-content" id="bs-2">
+        <div class="section-header" style="margin-bottom:28px"><h2 style="font-size:24px">Choose a Date</h2><p>Select your preferred consultation date (Mon–Sat available)</p></div>
+        <div class="cal-card">
+          <div class="cal-nav">
+            <button class="cal-btn" onclick="chMon(-1)">‹</button>
+            <h3 id="calTitle">April 2026</h3>
+            <button class="cal-btn" onclick="chMon(1)">›</button>
+          </div>
+          <div class="cal-dh"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+          <div class="cal-days" id="calDays"></div>
+        </div>
+        <div style="text-align:center;margin-top:22px">
+          <button class="btn btn-outline" onclick="goBkStep(1)" style="margin-right:12px">← Back</button>
+          <button class="btn btn-primary" id="nextDateBtn" onclick="goBkStep(3)" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bk-content" id="bs-3">
+        <div class="section-header" style="margin-bottom:28px"><h2 style="font-size:24px">Choose a Time Slot</h2><p>All times in IST. Selected: <strong id="selDateDisp">—</strong></p></div>
+        <div class="time-slots">
+          <button class="tslot" onclick="selTime(this,'9:00 AM')">9:00 AM</button>
+          <button class="tslot" onclick="selTime(this,'9:30 AM')">9:30 AM</button>
+          <button class="tslot" onclick="selTime(this,'10:00 AM')">10:00 AM</button>
+          <button class="tslot" onclick="selTime(this,'10:30 AM')">10:30 AM</button>
+          <button class="tslot" onclick="selTime(this,'11:00 AM')">11:00 AM</button>
+          <button class="tslot" onclick="selTime(this,'11:30 AM')">11:30 AM</button>
+          <button class="tslot" onclick="selTime(this,'12:00 PM')">12:00 PM</button>
+          <button class="tslot" onclick="selTime(this,'2:00 PM')">2:00 PM</button>
+          <button class="tslot" onclick="selTime(this,'2:30 PM')">2:30 PM</button>
+          <button class="tslot" onclick="selTime(this,'3:00 PM')">3:00 PM</button>
+          <button class="tslot" onclick="selTime(this,'3:30 PM')">3:30 PM</button>
+          <button class="tslot" onclick="selTime(this,'4:00 PM')">4:00 PM</button>
+          <button class="tslot" onclick="selTime(this,'4:30 PM')">4:30 PM</button>
+          <button class="tslot" onclick="selTime(this,'5:00 PM')">5:00 PM</button>
+          <button class="tslot" onclick="selTime(this,'5:30 PM')">5:30 PM</button>
+        </div>
+        <div style="text-align:center;margin-top:28px">
+          <button class="btn btn-outline" onclick="goBkStep(2)" style="margin-right:12px">← Back</button>
+          <button class="btn btn-primary" id="nextTimeBtn" onclick="goBkStep(4)" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bk-content" id="bs-4">
+        <div class="section-header" style="margin-bottom:28px"><h2 style="font-size:24px">Your Contact Details</h2><p>We'll send a confirmation to your email</p></div>
+        <div class="form-card" style="max-width:560px;margin:0 auto">
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="bf" placeholder="John" required></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="bl" placeholder="Smith"></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" id="be" placeholder="john@yourfirm.co.uk" required></div>
+          <div class="form-group"><label>Company / Practice Name</label><input type="text" id="bc" placeholder="Your Accountancy Firm Ltd."></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="bp" placeholder="+44 7700 900000"></div>
+          <div class="form-group"><label>Anything to share in advance?</label><textarea id="bn" placeholder="Brief description of your requirements, volume of work, software used..." style="min-height:80px"></textarea></div>
+        </div>
+        <div style="text-align:center;margin-top:22px">
+          <button class="btn btn-outline" onclick="goBkStep(3)" style="margin-right:12px">← Back</button>
+          <button class="btn btn-primary" onclick="goBkStep(5)">Review Booking →</button>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="bk-content" id="bs-5">
+        <div id="confCard" class="form-card" style="max-width:560px;margin:0 auto;text-align:center">
+          <div style="font-size:48px;margin-bottom:14px">📋</div>
+          <h3 style="font-size:22px;font-weight:500;margin-bottom:22px;letter-spacing:-0.02em">Confirm Your Booking</h3>
+          <div style="background:var(--navy-800);border-radius:var(--r);padding:20px;margin-bottom:22px;text-align:left">
+            <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13px">
+              <span style="color:var(--gray-500)">Service</span><span id="cs" style="font-weight:500">—</span>
+              <span style="color:var(--gray-500)">Date</span><span id="cd" style="font-weight:500">—</span>
+              <span style="color:var(--gray-500)">Time</span><span id="ct" style="font-weight:500">—</span>
+              <span style="color:var(--gray-500)">Name</span><span id="cn" style="font-weight:500">—</span>
+              <span style="color:var(--gray-500)">Email</span><span id="ce" style="font-weight:500">—</span>
+              <span style="color:var(--gray-500)">Company</span><span id="cc" style="font-weight:500">—</span>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--gray-300);margin-bottom:22px;font-weight:300">On confirming, the booking details will be sent to quantum-kpo@gmail.com and a confirmation will be emailed to you.</p>
+          <div id="bkErrMsg" style="display:none;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;color:#fca5a5;text-align:left"></div>
+          <button class="btn btn-outline" onclick="goBkStep(4)" style="margin-right:10px">← Edit</button>
+          <button class="btn btn-primary btn-lg" id="confirmBkBtn" onclick="confirmBk()">✅ Confirm Booking</button>
+        </div>
+        <div id="bkSucc" style="display:none;max-width:560px;margin:24px auto;text-align:center">
+          <div style="background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);border-radius:var(--rl);padding:44px">
+            <div style="font-size:56px;margin-bottom:14px">🎉</div>
+            <h3 style="font-size:24px;font-weight:500;margin-bottom:12px;color:var(--teal-400);letter-spacing:-0.02em">Booking Confirmed!</h3>
+            <p style="color:var(--gray-300);font-size:15px;line-height:1.7;font-weight:300">Your consultation request has been sent to our team. We'll be in touch shortly to confirm the meeting link. We look forward to speaking with you!</p>
+            <button class="btn btn-primary" onclick="nav('home')" style="margin-top:24px">Back to Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="logo" onclick="nav('home')"><div class="logo-icon">Q</div><div class="logo-text">Quantum<span>KPO</span></div></div>
+      <p>India's trusted UK accounting outsourcing partner — delivering precision, expertise, and cost-effective accounting support to UK businesses and practices.</p>
+      <div class="socials">
+        <a class="social" title="LinkedIn">in</a>
+        <a class="social" title="Twitter">𝕏</a>
+        <a class="social" title="Facebook">f</a>
+        <a class="social" href="mailto:quantum-kpo@gmail.com" title="Email">✉</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h5>Company</h5>
+      <ul class="foot-links">
+        <li><a onclick="nav('about')">About Us</a></li>
+        <li><a onclick="nav('about')">Our Team</a></li>
+        <li><a onclick="nav('clientele')">Clientele</a></li>
+        <li><a onclick="nav('contact')">Careers</a></li>
+        <li><a onclick="nav('contact')">Partner With Us</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Services</h5>
+      <ul class="foot-links">
+        <li><a onclick="nav('services')">Bookkeeping</a></li>
+        <li><a onclick="nav('services')">Payroll & RTI</a></li>
+        <li><a onclick="nav('services')">VAT Returns</a></li>
+        <li><a onclick="nav('services')">Self Assessment</a></li>
+        <li><a onclick="nav('services')">Corporation Tax</a></li>
+        <li><a onclick="nav('services')">Year-End Accounts</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <div class="foot-contact">
+        <div class="fci"><span>📍</span><span>514, Nobles Trade Centre, Memnagar, Ahmedabad – 380052, Gujarat</span></div>
+        <div class="fci"><span>📞</span><span>+91 9879160201</span></div>
+        <div class="fci"><span>✉️</span><span>quantum-kpo@gmail.com</span></div>
+        <div class="fci"><span>🕐</span><span>Mon–Sat: 9am – 7pm IST</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Quantum KPO Services Pvt. Ltd. All rights reserved.</span>
+    <div style="display:flex;gap:18px"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
+</footer>
+
+<script>
+// ================================================================
+// EMAILJS SETUP — Required for Book a Meeting to send real emails
+// ================================================================
+// 1. Go to https://www.emailjs.com and create a free account
+// 2. Add Gmail as an Email Service (connect quantum-kpo@gmail.com)
+//    → Copy the Service ID (e.g. "service_abc123")
+// 3. Create an Email Template — use these variables in your template:
+//    {{service}}, {{date}}, {{time}}, {{client_name}},
+//    {{client_email}}, {{company}}, {{phone}}, {{notes}}
+//    Set "To Email" to: quantum-kpo@gmail.com
+//    → Copy the Template ID (e.g. "template_xyz456")
+// 4. Go to Account → Public Key → copy it (e.g. "user_aBcDeF...")
+// 5. Replace the three values below:
+// ================================================================
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
+
+(function(){emailjs.init(EMAILJS_PUBLIC_KEY)})();
+
+// ── NAVIGATION ──
+const pages=['home','about','services','clientele','contact','book'];
+let curPage='home';
+function nav(p){
+  if(!pages.includes(p))return;
+  document.getElementById('pg-'+curPage).classList.add('hidden');
+  document.getElementById('pg-'+p).classList.remove('hidden');
+  curPage=p;
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('[data-p]').forEach(a=>{
+    a.classList.remove('active');
+    if(a.dataset.p===p)a.classList.add('active');
+  });
+  setTimeout(initReveal,80);
+  if(p==='book'){initCal();resetBooking();}
+}
+
+// ── MOBILE MENU ──
+function toggleMob(){document.getElementById('mobNav').classList.toggle('open')}
+
+// ── SCROLL NAVBAR ──
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>50));
+
+// ── REVEAL ──
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:0.08});
+  document.querySelectorAll('#pg-'+curPage+' .reveal:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+// ── COUNTER ──
+function animCount(el){
+  const target=+el.dataset.count,dur=1800;let start=0;
+  const step=ts=>{if(!start)start=ts;const p=Math.min((ts-start)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=Math.round(e*target);if(p<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step);
+}
+
+// ── PARTICLE CANVAS ──
+function initCanvas(){
+  const cv=document.getElementById('hero-canvas');if(!cv)return;
+  const ctx=cv.getContext('2d');let W,H,pts=[];
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight}
+  class P{constructor(){this.reset()}reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5;this.r=Math.random()*2.5+.8;this.a=Math.random()*.5+.2}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(94,142,255,${this.a})`;ctx.fill()}}
+  function init(){resize();pts=Array.from({length:65},()=>new P())}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach((p,i)=>{p.update();p.draw();pts.forEach((q,j)=>{if(j<=i)return;const dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);if(d<130){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(79,142,247,${(1-d/130)*.12})`;ctx.lineWidth=1;ctx.stroke()}})});
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();pts.forEach(p=>p.reset())});
+  init();draw();
+}
+
+// ── CALENDAR ──
+let calY,calM,selDate=null;
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function initCal(){const n=new Date();calY=n.getFullYear();calM=n.getMonth();renderCal()}
+function renderCal(){
+  document.getElementById('calTitle').textContent=MN[calM]+' '+calY;
+  const g=document.getElementById('calDays');g.innerHTML='';
+  const now=new Date();
+  const fd=new Date(calY,calM,1).getDay();
+  const dim=new Date(calY,calM+1,0).getDate();
+  for(let i=0;i<fd;i++){const el=document.createElement('button');el.className='cal-day empty';el.disabled=true;g.appendChild(el)}
+  for(let d=1;d<=dim;d++){
+    const el=document.createElement('button');el.className='cal-day';el.textContent=d;
+    const dt=new Date(calY,calM,d);
+    const past=dt<new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    const sun=dt.getDay()===0;
+    if(past||sun){el.classList.add('past');el.disabled=true}
+    else{if(dt.toDateString()===now.toDateString())el.classList.add('today');if(selDate&&dt.toDateString()===selDate.toDateString())el.classList.add('selected');el.onclick=()=>pickDate(dt,el)}
+    g.appendChild(el);
+  }
+}
+function pickDate(dt,el){
+  document.querySelectorAll('.cal-day.selected').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');selDate=dt;
+  document.getElementById('selDateDisp').textContent=DS[dt.getDay()]+', '+MS[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();
+  document.getElementById('nextDateBtn').disabled=false;
+}
+function chMon(d){calM+=d;if(calM>11){calM=0;calY++}if(calM<0){calM=11;calY--}renderCal()}
+
+// ── BOOKING FLOW ──
+let bkData={svc:'',time:''};
+function resetBooking(){
+  bkData={svc:'',time:''};selDate=null;
+  goBkStep(1);
+  document.getElementById('confCard').style.display='block';
+  document.getElementById('bkSucc').style.display='none';
+  document.getElementById('bkErrMsg').style.display='none';
+  ['bf','bl','be','bc','bp','bn'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  document.querySelectorAll('.tslot').forEach(b=>b.classList.remove('selected'));
+  if(document.getElementById('nextTimeBtn'))document.getElementById('nextTimeBtn').disabled=true;
+  if(document.getElementById('nextDateBtn'))document.getElementById('nextDateBtn').disabled=true;
+}
+function goBkStep(s){
+  document.querySelectorAll('.bk-content').forEach(el=>el.classList.remove('active'));
+  document.getElementById('bs-'+s).classList.add('active');
+  document.querySelectorAll('.bk-step').forEach(el=>{const n=+el.dataset.s;el.classList.remove('active','done');if(n===s)el.classList.add('active');if(n<s)el.classList.add('done')});
+  if(s===5)populateConf();
+}
+function selSvc(card,svc){
+  document.querySelectorAll('#bs-1 .scard').forEach(c=>c.style.borderColor='');
+  card.style.borderColor='var(--blue-500)';bkData.svc=svc;
+  setTimeout(()=>goBkStep(2),280);
+}
+function selTime(btn,t){
+  document.querySelectorAll('.tslot').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');bkData.time=t;
+  document.getElementById('nextTimeBtn').disabled=false;
+}
+function populateConf(){
+  let ds=selDate?DS[selDate.getDay()]+', '+MS[selDate.getMonth()]+' '+selDate.getDate()+', '+selDate.getFullYear():'—';
+  document.getElementById('cs').textContent=bkData.svc||'—';
+  document.getElementById('cd').textContent=ds;
+  document.getElementById('ct').textContent=bkData.time||'—';
+  const fn=document.getElementById('bf')?.value||'';
+  const ln=document.getElementById('bl')?.value||'';
+  document.getElementById('cn').textContent=(fn+' '+ln).trim()||'—';
+  document.getElementById('ce').textContent=document.getElementById('be')?.value||'—';
+  document.getElementById('cc').textContent=document.getElementById('bc')?.value||'—';
+}
+
+// ── CONFIRM BOOKING (EmailJS) ──
+async function confirmBk(){
+  const btn=document.getElementById('confirmBkBtn');
+  const errEl=document.getElementById('bkErrMsg');
+  btn.disabled=true;
+  btn.textContent='Sending…';
+  errEl.style.display='none';
+
+  const fn=document.getElementById('bf')?.value||'';
+  const ln=document.getElementById('bl')?.value||'';
+  const ds=selDate?DS[selDate.getDay()]+', '+MS[selDate.getMonth()]+' '+selDate.getDate()+', '+selDate.getFullYear():'Not selected';
+
+  const params={
+    service:   bkData.svc||'Not specified',
+    date:      ds,
+    time:      bkData.time||'Not selected',
+    client_name: (fn+' '+ln).trim()||'Not provided',
+    client_email: document.getElementById('be')?.value||'Not provided',
+    company:   document.getElementById('bc')?.value||'Not provided',
+    phone:     document.getElementById('bp')?.value||'Not provided',
+    notes:     document.getElementById('bn')?.value||'None',
+    to_email:  'quantum-kpo@gmail.com'
+  };
+
+  // Check if EmailJS is configured
+  if(EMAILJS_SERVICE_ID==='YOUR_SERVICE_ID'||EMAILJS_TEMPLATE_ID==='YOUR_TEMPLATE_ID'||EMAILJS_PUBLIC_KEY==='YOUR_PUBLIC_KEY'){
+    // EmailJS not configured — show success for demo purposes and log details
+    console.log('📧 Booking details (EmailJS not configured yet):', params);
+    document.getElementById('confCard').style.display='none';
+    document.getElementById('bkSucc').style.display='block';
+    showToast('🎉 Booking received! Configure EmailJS to enable email notifications.');
+    btn.disabled=false;
+    btn.textContent='✅ Confirm Booking';
+    return;
+  }
+
+  try{
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    document.getElementById('confCard').style.display='none';
+    document.getElementById('bkSucc').style.display='block';
+    showToast('🎉 Booking confirmed! You\'ll receive an email shortly.');
+  }catch(err){
+    console.error('EmailJS error:',err);
+    errEl.textContent='⚠️ Failed to send booking. Please email us directly at quantum-kpo@gmail.com or try again.';
+    errEl.style.display='block';
+    btn.disabled=false;
+    btn.textContent='✅ Confirm Booking';
+  }
+}
+
+// ── CONTACT FORM ──
+function submitContact(e){
+  e.preventDefault();
+  e.target.style.display='none';
+  document.getElementById('csucc').style.display='flex';
+  showToast('✅ Message sent! We\'ll respond within 4 hours.');
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);
+  setTimeout(()=>{t.style.transition='all 0.4s';t.style.opacity='0';t.style.transform='translateY(100%)';setTimeout(()=>t.remove(),400)},3500);
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded',()=>{
+  initCanvas();initReveal();
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(animCount);obs.unobserve(e.target)}})},{threshold:0.3});
+  const hs=document.querySelector('.hero-stats');if(hs)obs.observe(hs);
+});
+</script>
+</body>
+</html>
