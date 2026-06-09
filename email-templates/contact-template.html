@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Contact Message — Quantum KPO</title>
+<!--
+  EmailJS setup:
+  - Subject: New Enquiry: {{client_name}} — {{service}}
+  - To Email: {{to_email}}
+  - Reply To: {{client_email}}
+  - Paste everything inside <body> into EmailJS template editor (HTML mode)
+-->
+</head>
+<body style="margin:0;padding:0;background-color:#040D1E;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;">
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#040D1E;padding:32px 16px;">
+<tr>
+<td align="center">
+
+  <!-- Container -->
+  <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background-color:#071428;border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;">
+
+    <!-- Header -->
+    <tr>
+      <td style="background:linear-gradient(135deg,#3B72F8 0%,#00D4AA 100%);padding:28px 32px;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td>
+            <div style="display:inline-block;width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:8px;text-align:center;line-height:36px;font-size:18px;font-weight:bold;color:#ffffff;margin-bottom:12px;">Q</div>
+            <h1 style="margin:0 0 6px;font-size:22px;font-weight:600;color:#ffffff;letter-spacing:-0.02em;">New Contact Enquiry</h1>
+            <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.85);">Quantum KPO Services — Website Contact Form</p>
+          </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Intro -->
+    <tr>
+      <td style="padding:28px 32px 8px;">
+        <p style="margin:0;font-size:15px;color:#B8C5DC;line-height:1.6;">
+          Someone has submitted a message through the contact form. Please respond within 4 business hours.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Sender details -->
+    <tr>
+      <td style="padding:20px 32px;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#0D1E3E;border:1px solid rgba(59,114,248,0.25);border-radius:10px;">
+        <tr>
+          <td style="padding:20px 24px;">
+            <p style="margin:0 0 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#5E8EFF;">Sender Details</p>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding:8px 0;font-size:13px;color:#6A7FA3;width:120px;vertical-align:top;">First Name</td>
+                <td style="padding:8px 0;font-size:14px;color:#F0F6FF;font-weight:500;">{{first_name}}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0;font-size:13px;color:#6A7FA3;vertical-align:top;">Last Name</td>
+                <td style="padding:8px 0;font-size:14px;color:#F0F6FF;">{{last_name}}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0;font-size:13px;color:#6A7FA3;vertical-align:top;">Full Name</td>
+                <td style="padding:8px 0;font-size:14px;color:#F0F6FF;font-weight:500;">{{client_name}}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0;font-size:13px;color:#6A7FA3;vertical-align:top;">Email</td>
+                <td style="padding:8px 0;font-size:14px;color:#5E8EFF;"><a href="mailto:{{client_email}}" style="color:#5E8EFF;text-decoration:none;">{{client_email}}</a></td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0;font-size:13px;color:#6A7FA3;vertical-align:top;">Company</td>
+                <td style="padding:8px 0;font-size:14px;color:#F0F6FF;">{{company}}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0;font-size:13px;color:#6A7FA3;vertical-align:top;">Service</td>
+                <td style="padding:8px 0;font-size:14px;color:#00D4AA;font-weight:500;">{{service}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Message -->
+    <tr>
+      <td style="padding:0 32px 28px;">
+        <p style="margin:0 0 10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#6A7FA3;">Message</p>
+        <div style="background-color:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-left:3px solid #00D4AA;border-radius:10px;padding:20px 24px;font-size:15px;color:#B8C5DC;line-height:1.75;white-space:pre-wrap;">{{message}}</div>
+      </td>
+    </tr>
+
+    <!-- CTA -->
+    <tr>
+      <td style="padding:0 32px 32px;" align="center">
+        <a href="mailto:{{client_email}}" style="display:inline-block;background:linear-gradient(135deg,#3B72F8 0%,#00D4AA 100%);color:#ffffff;text-decoration:none;font-size:14px;font-weight:500;padding:12px 28px;border-radius:8px;">Reply to {{first_name}}</a>
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td style="padding:20px 32px;border-top:1px solid rgba(255,255,255,0.1);background-color:#040D1E;">
+        <p style="margin:0 0 6px;font-size:12px;color:#6A7FA3;text-align:center;">Quantum KPO Services Pvt. Ltd.</p>
+        <p style="margin:0;font-size:11px;color:#2E3E5C;text-align:center;">514, Nobles Trade Centre, Memnagar, Ahmedabad – 380052 · +91 9879160201</p>
+      </td>
+    </tr>
+
+  </table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

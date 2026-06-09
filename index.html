@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quantum KPO Services — UK Accounting Outsourcing</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <!-- EmailJS — needed for Book a Meeting email sending -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="emailjs.config.js"></script>
 <style>
 :root {
   --navy-950:#040D1E;--navy-900:#071428;--navy-800:#0D1E3E;--navy-700:#152B58;
@@ -19,10 +22,18 @@
   --glass:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1);
   --fd:'Plus Jakarta Sans',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
   --tr:0.3s cubic-bezier(0.4,0,0.2,1);--r:12px;--rl:20px;
+  --scrollbar-track:var(--navy-900);--scrollbar-thumb:#2E3E5C;--scrollbar-thumb-hover:var(--blue-400);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{color-scheme:dark;scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--navy-950);color:var(--white);line-height:1.6;overflow-x:hidden;font-size:16px;font-weight:300;letter-spacing:-0.01em}
+/* SCROLLBAR */
+html,body,*{scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:var(--scrollbar-track)}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(59,114,248,0.55) 0%,rgba(0,212,170,0.55) 100%);border-radius:6px;border:3px solid var(--scrollbar-track);min-height:48px}
+*::-webkit-scrollbar-thumb:hover{background:var(--grad)}
+*::-webkit-scrollbar-corner{background:var(--scrollbar-track)}
 h1,h2,h3,h4,h5,h6{font-family:var(--fd);letter-spacing:-0.02em}
 p{font-weight:300}
 .hidden{display:none!important}
@@ -193,6 +204,24 @@ input:focus,textarea:focus,select:focus{border-color:var(--blue-500)}
 select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236A7FA3' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
 select option{background:var(--navy-800);color:var(--white)}
 textarea{min-height:110px;resize:vertical}
+
+/* FORM VALIDATION */
+.form-group input:user-invalid:not(:focus),
+.form-group textarea:user-invalid:not(:focus),
+.form-group select:user-invalid:not(:focus){border-color:rgba(248,113,113,0.55);box-shadow:0 0 0 3px rgba(248,113,113,0.1)}
+form.was-validated .form-group input:invalid,
+form.was-validated .form-group textarea:invalid,
+form.was-validated .form-group select:invalid{border-color:rgba(248,113,113,0.55);box-shadow:0 0 0 3px rgba(248,113,113,0.1)}
+form.was-validated .form-group input:valid:not(:placeholder-shown),
+form.was-validated .form-group textarea:valid:not(:placeholder-shown){border-color:rgba(0,212,170,0.45)}
+form.was-validated .form-group.has-error input,
+form.was-validated .form-group.has-error textarea,
+form.was-validated .form-group.has-error select{border-color:rgba(248,113,113,0.55);box-shadow:0 0 0 3px rgba(248,113,113,0.1)}
+.form-group.has-error label{color:#fca5a5}
+.field-error{display:block;margin-top:6px;font-size:12px;color:#fca5a5;font-weight:400;line-height:1.4}
+.form-alert-error{display:none;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:var(--r);padding:14px 16px;font-size:13px;color:#fca5a5;margin-bottom:16px;line-height:1.5;font-weight:300}
+.form-alert-error.show{display:block}
+input:invalid:focus,textarea:invalid:focus,select:invalid:focus{border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(59,114,248,0.15)}
 
 /* BOOKING */
 .booking-container{max-width:900px;margin:0 auto}
@@ -687,15 +716,16 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
       </div>
       <div class="form-card">
         <h3 style="font-size:20px;font-weight:500;margin-bottom:22px;letter-spacing:-0.02em">Send Us a Message</h3>
-        <form id="contactForm" onsubmit="submitContact(event)">
+        <form id="contactForm" onsubmit="submitContact(event)" novalidate>
+          <div id="contactErr" class="form-alert-error"></div>
           <div class="form-row">
-            <div class="form-group"><label>First Name</label><input type="text" placeholder="John" required></div>
-            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+            <div class="form-group"><label>First Name</label><input type="text" name="firstName" placeholder="John" required><span class="field-error"></span></div>
+            <div class="form-group"><label>Last Name</label><input type="text" name="lastName" placeholder="Smith"></div>
           </div>
-          <div class="form-group"><label>Email</label><input type="email" placeholder="john@yourfirm.co.uk" required></div>
-          <div class="form-group"><label>Company / Practice Name</label><input type="text" placeholder="Your Accountancy Firm Ltd."></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="john@yourfirm.co.uk" required><span class="field-error"></span></div>
+          <div class="form-group"><label>Company / Practice Name</label><input type="text" name="company" placeholder="Your Accountancy Firm Ltd."></div>
           <div class="form-group"><label>Service of Interest</label>
-            <select>
+            <select name="service">
               <option value="">Select a service...</option>
               <option>Bookkeeping & Accounts</option>
               <option>Payroll Processing & RTI</option>
@@ -708,8 +738,8 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
               <option>Multiple / Full Service</option>
             </select>
           </div>
-          <div class="form-group"><label>Your Message</label><textarea placeholder="Tell us about your requirements, volume of work, software you use, or any questions you have..."></textarea></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;padding:14px">Send Message →</button>
+          <div class="form-group"><label>Your Message</label><textarea name="message" placeholder="Tell us about your requirements, volume of work, software you use, or any questions you have..."></textarea></div>
+          <button type="submit" id="contactSubmitBtn" class="btn btn-primary" style="width:100%;padding:14px">Send Message →</button>
         </form>
         <div id="csucc" style="display:none" class="succ">✅ Your message has been sent! We'll be in touch within 4 business hours.</div>
       </div>
@@ -897,25 +927,21 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 </footer>
 
 <script>
-// ================================================================
-// EMAILJS SETUP — Required for Book a Meeting to send real emails
-// ================================================================
-// 1. Go to https://www.emailjs.com and create a free account
-// 2. Add Gmail as an Email Service (connect quantum-kpo@gmail.com)
-//    → Copy the Service ID (e.g. "service_abc123")
-// 3. Create an Email Template — use these variables in your template:
-//    {{service}}, {{date}}, {{time}}, {{client_name}},
-//    {{client_email}}, {{company}}, {{phone}}, {{notes}}
-//    Set "To Email" to: quantum-kpo@gmail.com
-//    → Copy the Template ID (e.g. "template_xyz456")
-// 4. Go to Account → Public Key → copy it (e.g. "user_aBcDeF...")
-// 5. Replace the three values below:
-// ================================================================
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
+// ── EMAILJS ──
+const EJ=window.EMAILJS_CONFIG||{};
+const PLACEHOLDERS=['YOUR_PUBLIC_KEY','YOUR_SERVICE_ID','YOUR_BOOKING_TEMPLATE_ID','YOUR_CONTACT_TEMPLATE_ID'];
 
-(function(){emailjs.init(EMAILJS_PUBLIC_KEY)})();
+function isEmailJsConfigured(){
+  return EJ.publicKey&&EJ.serviceId&&EJ.templates?.booking&&EJ.templates?.contact
+    &&!PLACEHOLDERS.includes(EJ.publicKey)&&!PLACEHOLDERS.includes(EJ.serviceId)
+    &&!PLACEHOLDERS.includes(EJ.templates.booking)&&!PLACEHOLDERS.includes(EJ.templates.contact);
+}
+
+if(EJ.publicKey&&EJ.publicKey!=='YOUR_PUBLIC_KEY')emailjs.init(EJ.publicKey);
+
+async function sendViaEmailJs(templateKey,params){
+  return emailjs.send(EJ.serviceId,EJ.templates[templateKey],{...params,to_email:EJ.toEmail||'quantum-kpo@gmail.com'});
+}
 
 // ── NAVIGATION ──
 const pages=['home','about','services','clientele','contact','book'];
@@ -1068,19 +1094,18 @@ async function confirmBk(){
   };
 
   // Check if EmailJS is configured
-  if(EMAILJS_SERVICE_ID==='YOUR_SERVICE_ID'||EMAILJS_TEMPLATE_ID==='YOUR_TEMPLATE_ID'||EMAILJS_PUBLIC_KEY==='YOUR_PUBLIC_KEY'){
-    // EmailJS not configured — show success for demo purposes and log details
+  if(!isEmailJsConfigured()){
     console.log('📧 Booking details (EmailJS not configured yet):', params);
     document.getElementById('confCard').style.display='none';
     document.getElementById('bkSucc').style.display='block';
-    showToast('🎉 Booking received! Configure EmailJS to enable email notifications.');
+    showToast('🎉 Booking received! Add your EmailJS keys to emailjs.config.js to enable emails.');
     btn.disabled=false;
     btn.textContent='✅ Confirm Booking';
     return;
   }
 
   try{
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    await sendViaEmailJs('booking',params);
     document.getElementById('confCard').style.display='none';
     document.getElementById('bkSucc').style.display='block';
     showToast('🎉 Booking confirmed! You\'ll receive an email shortly.');
@@ -1094,11 +1119,70 @@ async function confirmBk(){
 }
 
 // ── CONTACT FORM ──
-function submitContact(e){
+async function submitContact(e){
   e.preventDefault();
-  e.target.style.display='none';
-  document.getElementById('csucc').style.display='flex';
-  showToast('✅ Message sent! We\'ll respond within 4 hours.');
+  const form=e.target;
+  const btn=document.getElementById('contactSubmitBtn');
+  form.classList.add('was-validated');
+  document.getElementById('contactErr').classList.remove('show');
+  form.querySelectorAll('.form-group').forEach(g=>g.classList.remove('has-error'));
+  form.querySelectorAll('.field-error').forEach(el=>el.textContent='');
+
+  let valid=true;
+  form.querySelectorAll('[required]').forEach(field=>{
+    const group=field.closest('.form-group');
+    const errEl=group?.querySelector('.field-error');
+    if(!field.value.trim()){
+      valid=false;
+      group?.classList.add('has-error');
+      if(errEl)errEl.textContent=field.type==='email'?'Email is required':'This field is required';
+    }else if(field.type==='email'&&!field.checkValidity()){
+      valid=false;
+      group?.classList.add('has-error');
+      if(errEl)errEl.textContent='Please enter a valid email address';
+    }
+  });
+  if(!valid){
+    document.getElementById('contactErr').textContent='Please fix the highlighted fields before sending.';
+    document.getElementById('contactErr').classList.add('show');
+    return;
+  }
+
+  const fn=form.firstName.value.trim();
+  const ln=form.lastName.value.trim();
+  const params={
+    first_name: fn,
+    last_name: ln||'—',
+    client_name: (fn+' '+ln).trim(),
+    client_email: form.email.value.trim(),
+    company: form.company?.value?.trim()||'Not provided',
+    service: form.service?.value||'Not specified',
+    message: form.message?.value?.trim()||'None'
+  };
+
+  btn.disabled=true;
+  btn.textContent='Sending…';
+
+  if(!isEmailJsConfigured()){
+    console.log('📧 Contact message (EmailJS not configured yet):', params);
+    form.style.display='none';
+    document.getElementById('csucc').style.display='flex';
+    showToast('✅ Message received! Add your EmailJS keys to emailjs.config.js to enable emails.');
+    return;
+  }
+
+  try{
+    await sendViaEmailJs('contact',params);
+    form.style.display='none';
+    document.getElementById('csucc').style.display='flex';
+    showToast('✅ Message sent! We\'ll respond within 4 hours.');
+  }catch(err){
+    console.error('EmailJS error:',err);
+    document.getElementById('contactErr').textContent='⚠️ Failed to send message. Please email us at quantum-kpo@gmail.com or try again.';
+    document.getElementById('contactErr').classList.add('show');
+    btn.disabled=false;
+    btn.textContent='Send Message →';
+  }
 }
 
 // ── TOAST ──
