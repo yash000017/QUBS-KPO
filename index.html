@@ -396,6 +396,19 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 .succ{background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.3);border-radius:var(--r);padding:16px 18px;color:var(--teal-400);font-size:14px;display:flex;align-items:center;gap:10px;margin-top:16px;font-weight:300}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--navy-800);border:1px solid rgba(0,212,170,0.3);border-radius:var(--r);padding:14px 20px;color:var(--teal-400);font-size:13px;font-weight:400;z-index:9999;display:flex;align-items:center;gap:10px;animation:slideUp 0.3s ease;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* EMAIL FAIL MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(4,13,30,0.75);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity 0.25s,visibility 0.25s}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal-box{background:var(--navy-800);border:1px solid rgba(248,113,113,0.35);border-radius:var(--rl);padding:36px 32px;max-width:440px;width:100%;text-align:center;transform:translateY(16px) scale(0.97);transition:transform 0.25s;box-shadow:0 24px 64px rgba(0,0,0,0.5)}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-icon{font-size:48px;margin-bottom:16px}
+.modal-box h3{font-size:20px;font-weight:500;margin-bottom:10px;letter-spacing:-0.02em}
+.modal-box p{font-size:14px;color:var(--gray-300);line-height:1.65;margin-bottom:20px;font-weight:300}
+.modal-email{display:block;background:rgba(59,114,248,0.12);border:1px solid rgba(59,114,248,0.3);border-radius:var(--r);padding:14px 18px;font-size:16px;font-weight:500;color:var(--blue-400);text-decoration:none;margin-bottom:24px;word-break:break-all;transition:background 0.2s}
+.modal-email:hover{background:rgba(59,114,248,0.2)}
+.modal-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.modal-btns .btn{flex:1;min-width:120px}
 .bg-alt{background:var(--navy-900)}
 .sep{height:1px;background:var(--gb);margin:64px 0}
 
@@ -468,6 +481,9 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
   .bk-step-sub h2{font-size:20px}
   .bk-svc-grid{grid-template-columns:repeat(2,1fr)!important}
   .toast{left:16px;right:16px;bottom:16px}
+  .modal-box{padding:28px 22px}
+  .modal-btns{flex-direction:column}
+  .modal-btns .btn{width:100%}
   .faq-item summary{padding:16px 18px;font-size:14px}
   .form-row{grid-template-columns:1fr}
   input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{font-size:16px}
@@ -1179,6 +1195,20 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
   </div>
 </footer>
 
+<!-- EMAIL FAIL MODAL -->
+<div class="modal-overlay" id="emailFailModal" role="dialog" aria-modal="true" aria-labelledby="emailFailTitle" onclick="if(event.target===this)closeEmailFailModal()">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <h3 id="emailFailTitle">Message Couldn't Be Sent</h3>
+    <p id="emailFailMsg">Something went wrong while sending your message. Please contact us directly using the email below — we'll respond within 4 business hours.</p>
+    <a class="modal-email" id="emailFailLink" href="mailto:quantum-kpo@gmail.com">quantum-kpo@gmail.com</a>
+    <div class="modal-btns">
+      <a class="btn btn-primary" id="emailFailMailto" href="mailto:quantum-kpo@gmail.com">✉️ Email Us Directly</a>
+      <button class="btn btn-outline" onclick="closeEmailFailModal()">Try Again</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── EMAILJS ──
 const EJ=window.EMAILJS_CONFIG||{};
@@ -1403,8 +1433,8 @@ async function confirmBk(){
     showToast('🎉 Booking confirmed! You\'ll receive an email shortly.');
   }catch(err){
     console.error('EmailJS error:',err);
-    errEl.textContent='⚠️ Failed to send booking. Please email us directly at quantum-kpo@gmail.com or try again.';
-    errEl.style.display='block';
+    errEl.style.display='none';
+    showEmailFailModal('Your booking could not be sent. Please email us directly to confirm your consultation.');
     btn.disabled=false;
     btn.textContent='✅ Confirm Booking';
   }
@@ -1470,12 +1500,31 @@ async function submitContact(e){
     showToast('✅ Message sent! We\'ll respond within 4 hours.');
   }catch(err){
     console.error('EmailJS error:',err);
-    document.getElementById('contactErr').textContent='⚠️ Failed to send message. Please email us at quantum-kpo@gmail.com or try again.';
-    document.getElementById('contactErr').classList.add('show');
+    showEmailFailModal();
     btn.disabled=false;
     btn.textContent='Send Message →';
   }
 }
+
+// ── EMAIL FAIL MODAL ──
+function getContactEmail(){
+  return EJ.toEmail||'quantum-kpo@gmail.com';
+}
+function showEmailFailModal(msg){
+  const email=getContactEmail();
+  const modal=document.getElementById('emailFailModal');
+  document.getElementById('emailFailMsg').textContent=msg||'Something went wrong while sending your message. Please contact us directly using the email below — we\'ll respond within 4 business hours.';
+  document.getElementById('emailFailLink').textContent=email;
+  document.getElementById('emailFailLink').href='mailto:'+email;
+  document.getElementById('emailFailMailto').href='mailto:'+email;
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeEmailFailModal(){
+  document.getElementById('emailFailModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeEmailFailModal()});
 
 // ── TOAST ──
 function showToast(msg){
