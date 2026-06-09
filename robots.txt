@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://quantumkpo.com/sitemap.xml
+Sitemap: https://qubs-kpo.co.uk/sitemap.xml
