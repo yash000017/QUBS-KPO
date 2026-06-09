@@ -83,13 +83,15 @@ section{padding:80px 5%}
 .hero h1{font-size:clamp(36px,5.5vw,64px);font-weight:200;line-height:1.1;margin-bottom:24px;letter-spacing:-0.025em}
 .hero p.lead{font-size:18px;color:var(--gray-300);max-width:560px;margin-bottom:40px;line-height:1.8;font-weight:300}
 .hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
-.hero-stats{display:flex;gap:40px;flex-wrap:wrap}
-.hero-stat .num{font-size:34px;font-weight:500;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;letter-spacing:-0.02em}
-.hero-stat .lbl{font-size:13px;color:var(--gray-500);margin-top:4px;font-weight:300}
+.hero-stats{display:flex;gap:clamp(20px,3vw,36px);flex-wrap:nowrap}
+.hero-stat{display:flex;align-items:baseline;gap:3px;flex-shrink:0;white-space:nowrap}
+.hero-stat .num{font-size:34px;font-weight:500;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;display:inline-block;min-width:3ch;text-align:right}
+.hero-stat .lbl{font-size:13px;color:var(--gray-500);font-weight:300}
 .hero-card{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:2;background:var(--glass);backdrop-filter:blur(24px);border:1px solid var(--gb);border-radius:var(--rl);padding:28px;width:300px;animation:float 6s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(-50%)}50%{transform:translateY(calc(-50% - 14px))}}
 .hero-card h3{font-size:15px;font-weight:500;margin-bottom:18px;color:var(--gray-300)}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;background:rgba(59,114,248,0.12);border:1px solid rgba(59,114,248,0.2);border-radius:8px;font-size:12px;color:var(--blue-400);margin:3px;transition:all 0.2s;font-weight:400}
+.chip-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{display:flex;align-items:center;gap:6px;padding:7px 10px;background:rgba(59,114,248,0.12);border:1px solid rgba(59,114,248,0.2);border-radius:8px;font-size:11px;color:var(--blue-400);margin:0;transition:all 0.2s;font-weight:400;line-height:1.3}
 .chip.t{background:rgba(0,212,170,0.12);border-color:rgba(0,212,170,0.2);color:var(--teal-400)}
 
 /* CLIENTS */
@@ -298,7 +300,9 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
   section{padding:56px 5%}
   .ind-grid{grid-template-columns:repeat(2,1fr)}
   .foot-grid{grid-template-columns:1fr;gap:28px}
-  .hero-stats{gap:22px}
+  .hero-stats{gap:16px}
+  .hero-stat .num{font-size:28px;min-width:2.5ch}
+  .hero-stat .lbl{font-size:11px}
   .why-smalls{grid-template-columns:1fr 1fr}
   .val-grid{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
@@ -355,20 +359,22 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
         <button class="btn btn-outline btn-lg" onclick="nav('book')">Book Free Consultation</button>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num" data-count="150">0</span><span class="lbl">+ UK Clients</span></div>
-        <div class="hero-stat"><span class="num" data-count="8">0</span><span class="lbl">+ Years Experience</span></div>
+        <div class="hero-stat"><span class="num" data-count="500">0</span><span class="lbl">+ UK Clients</span></div>
+        <div class="hero-stat"><span class="num" data-count="10">0</span><span class="lbl">+ Years Experience</span></div>
         <div class="hero-stat"><span class="num" data-count="99">0</span><span class="lbl">% Accuracy Rate</span></div>
         <div class="hero-stat"><span class="num" data-count="25">0</span><span class="lbl">+ Accounting Experts</span></div>
       </div>
     </div>
     <div class="hero-card">
       <h3>Our Core Services</h3>
-      <span class="chip">📊 Bookkeeping</span>
-      <span class="chip t">💷 Payroll</span>
-      <span class="chip">📋 VAT Returns</span>
-      <span class="chip t">🧾 Self Assessment</span>
-      <span class="chip">🏢 Corporation Tax</span>
-      <span class="chip t">📁 Year-End Accounts</span>
+      <div class="chip-list">
+        <span class="chip">📊 Bookkeeping</span>
+        <span class="chip t">💷 Payroll</span>
+        <span class="chip">📋 VAT Returns</span>
+        <span class="chip t">🧾 Self Assessment</span>
+        <span class="chip">🏢 Corporation Tax</span>
+        <span class="chip t">📁 Year-End Accounts</span>
+      </div>
     </div>
   </section>
 
@@ -410,11 +416,11 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
     <div class="grid-2">
       <div class="reveal">
         <div class="why-big">
-          <div class="why-big-num">8+</div>
+          <div class="why-big-num">10+</div>
           <div class="why-big-lbl">Years Supporting UK Accounting Firms</div>
         </div>
         <div class="why-smalls">
-          <div class="ws"><div class="num">150+</div><div class="lbl">UK Clients</div></div>
+          <div class="ws"><div class="num">500+</div><div class="lbl">UK Clients</div></div>
           <div class="ws"><div class="num">25+</div><div class="lbl">Expert Staff</div></div>
           <div class="ws"><div class="num">99%</div><div class="lbl">Accuracy Rate</div></div>
           <div class="ws"><div class="num">48hr</div><div class="lbl">Turnaround</div></div>
@@ -446,7 +452,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
   <section style="padding-bottom:100px">
     <div class="cta-banner reveal">
       <h2>Ready to Reduce Your <span class="gt">Accounting Overhead?</span></h2>
-      <p>Join 150+ UK businesses and accounting firms that trust Quantum KPO for reliable, accurate, and cost-effective accounting support.</p>
+      <p>Join 500+ UK businesses and accounting firms that trust Quantum KPO for reliable, accurate, and cost-effective accounting support.</p>
       <div class="cta-btns">
         <button class="btn btn-primary btn-lg" onclick="nav('book')">📅 Book a Free Consultation</button>
         <button class="btn btn-outline btn-lg" onclick="nav('contact')">💬 Talk to Our Team</button>
