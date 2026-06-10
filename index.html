@@ -1016,9 +1016,8 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
       <div class="bk-steps" id="bkSteps">
         <div class="bk-step active" data-s="1"><div class="bk-num">1</div><div class="bk-lbl">Select Service</div></div>
         <div class="bk-step" data-s="2"><div class="bk-num">2</div><div class="bk-lbl">Pick Date</div></div>
-        <div class="bk-step" data-s="3"><div class="bk-num">3</div><div class="bk-lbl">Choose Time</div></div>
-        <div class="bk-step" data-s="4"><div class="bk-num">4</div><div class="bk-lbl">Your Details</div></div>
-        <div class="bk-step" data-s="5"><div class="bk-num">5</div><div class="bk-lbl">Confirm</div></div>
+        <div class="bk-step" data-s="3"><div class="bk-num">3</div><div class="bk-lbl">Your Details</div></div>
+        <div class="bk-step" data-s="4"><div class="bk-num">4</div><div class="bk-lbl">Confirm</div></div>
       </div>
 
       <!-- Step 1 -->
@@ -1038,7 +1037,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
 
       <!-- Step 2 -->
       <div class="bk-content" id="bs-2">
-        <div class="section-header bk-step-sub"><h2>Choose a Date</h2><p>Select your preferred consultation date (Mon–Sat available)</p></div>
+        <div class="section-header bk-step-sub"><h2>Choose a Date</h2><p>Select your preferred consultation date (Mon–Sat). We'll confirm a time with you by email.</p></div>
         <div class="cal-card">
           <div class="cal-nav">
             <button class="cal-btn" onclick="chMon(-1)">‹</button>
@@ -1054,34 +1053,8 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
         </div>
       </div>
 
-      <!-- Step 3 -->
+      <!-- Step 3: Details -->
       <div class="bk-content" id="bs-3">
-        <div class="section-header bk-step-sub"><h2>Choose a Time Slot</h2><p>All times in IST. Selected: <strong id="selDateDisp">—</strong></p></div>
-        <div class="time-slots">
-          <button class="tslot" onclick="selTime(this,'9:00 AM')">9:00 AM</button>
-          <button class="tslot" onclick="selTime(this,'9:30 AM')">9:30 AM</button>
-          <button class="tslot" onclick="selTime(this,'10:00 AM')">10:00 AM</button>
-          <button class="tslot" onclick="selTime(this,'10:30 AM')">10:30 AM</button>
-          <button class="tslot" onclick="selTime(this,'11:00 AM')">11:00 AM</button>
-          <button class="tslot" onclick="selTime(this,'11:30 AM')">11:30 AM</button>
-          <button class="tslot" onclick="selTime(this,'12:00 PM')">12:00 PM</button>
-          <button class="tslot" onclick="selTime(this,'2:00 PM')">2:00 PM</button>
-          <button class="tslot" onclick="selTime(this,'2:30 PM')">2:30 PM</button>
-          <button class="tslot" onclick="selTime(this,'3:00 PM')">3:00 PM</button>
-          <button class="tslot" onclick="selTime(this,'3:30 PM')">3:30 PM</button>
-          <button class="tslot" onclick="selTime(this,'4:00 PM')">4:00 PM</button>
-          <button class="tslot" onclick="selTime(this,'4:30 PM')">4:30 PM</button>
-          <button class="tslot" onclick="selTime(this,'5:00 PM')">5:00 PM</button>
-          <button class="tslot" onclick="selTime(this,'5:30 PM')">5:30 PM</button>
-        </div>
-        <div class="bk-actions">
-          <button class="btn btn-outline" onclick="goBkStep(2)">← Back</button>
-          <button class="btn btn-primary" id="nextTimeBtn" onclick="goBkStep(4)" disabled>Next →</button>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="bk-content" id="bs-4">
         <div class="section-header bk-step-sub"><h2>Your Contact Details</h2><p>We'll send a confirmation to your email</p></div>
         <div class="form-card bk-form-narrow">
           <div class="form-row">
@@ -1094,13 +1067,13 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           <div class="form-group"><label>Anything to share in advance?</label><textarea id="bn" placeholder="Brief description of your requirements, volume of work, software used..." style="min-height:80px"></textarea></div>
         </div>
         <div class="bk-actions">
-          <button class="btn btn-outline" onclick="goBkStep(3)">← Back</button>
-          <button class="btn btn-primary" onclick="goBkStep(5)">Review Booking →</button>
+          <button class="btn btn-outline" onclick="goBkStep(2)">← Back</button>
+          <button class="btn btn-primary" onclick="goBkStep(4)">Review Booking →</button>
         </div>
       </div>
 
-      <!-- Step 5 -->
-      <div class="bk-content" id="bs-5">
+      <!-- Step 4: Confirm -->
+      <div class="bk-content" id="bs-4">
         <div id="confCard" class="form-card bk-form-narrow" style="text-align:center">
           <div style="font-size:48px;margin-bottom:14px">📋</div>
           <h3 style="font-size:22px;font-weight:500;margin-bottom:22px;letter-spacing:-0.02em">Confirm Your Booking</h3>
@@ -1108,7 +1081,6 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
             <div class="conf-grid">
               <span style="color:var(--gray-500)">Service</span><span id="cs" style="font-weight:500">—</span>
               <span style="color:var(--gray-500)">Date</span><span id="cd" style="font-weight:500">—</span>
-              <span style="color:var(--gray-500)">Time</span><span id="ct" style="font-weight:500">—</span>
               <span style="color:var(--gray-500)">Name</span><span id="cn" style="font-weight:500">—</span>
               <span style="color:var(--gray-500)">Email</span><span id="ce" style="font-weight:500">—</span>
               <span style="color:var(--gray-500)">Company</span><span id="cc" style="font-weight:500">—</span>
@@ -1117,7 +1089,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           <p style="font-size:13px;color:var(--gray-300);margin-bottom:22px;font-weight:300">On confirming, the booking details will be sent to quantum-kpo@gmail.com and a confirmation will be emailed to you.</p>
           <div id="bkErrMsg" style="display:none;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;color:#fca5a5;text-align:left"></div>
           <div class="bk-actions">
-            <button class="btn btn-outline" onclick="goBkStep(4)">← Edit</button>
+            <button class="btn btn-outline" onclick="goBkStep(3)">← Edit</button>
             <button class="btn btn-primary btn-lg" id="confirmBkBtn" onclick="confirmBk()">✅ Confirm Booking</button>
           </div>
         </div>
@@ -1125,7 +1097,7 @@ footer{background:var(--navy-900);border-top:1px solid var(--gb);padding:64px 5%
           <div style="background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);border-radius:var(--rl);padding:44px">
             <div style="font-size:56px;margin-bottom:14px">🎉</div>
             <h3 style="font-size:24px;font-weight:500;margin-bottom:12px;color:var(--teal-400);letter-spacing:-0.02em">Booking Confirmed!</h3>
-            <p style="color:var(--gray-300);font-size:15px;line-height:1.7;font-weight:300">Your consultation request has been sent to our team. We'll be in touch shortly to confirm the meeting link. We look forward to speaking with you!</p>
+            <p style="color:var(--gray-300);font-size:15px;line-height:1.7;font-weight:300">Your consultation request has been sent to our team. We'll be in touch shortly to confirm a time and meeting link. We look forward to speaking with you!</p>
             <button class="btn btn-primary" onclick="nav('home')" style="margin-top:24px">Back to Home</button>
           </div>
         </div>
@@ -1345,45 +1317,36 @@ function renderCal(){
 function pickDate(dt,el){
   document.querySelectorAll('.cal-day.selected').forEach(e=>e.classList.remove('selected'));
   el.classList.add('selected');selDate=dt;
-  document.getElementById('selDateDisp').textContent=DS[dt.getDay()]+', '+MS[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();
   document.getElementById('nextDateBtn').disabled=false;
 }
 function chMon(d){calM+=d;if(calM>11){calM=0;calY++}if(calM<0){calM=11;calY--}renderCal()}
 
 // ── BOOKING FLOW ──
-let bkData={svc:'',time:''};
+let bkData={svc:''};
 function resetBooking(){
-  bkData={svc:'',time:''};selDate=null;
+  bkData={svc:''};selDate=null;
   goBkStep(1);
   document.getElementById('confCard').style.display='block';
   document.getElementById('bkSucc').style.display='none';
   document.getElementById('bkErrMsg').style.display='none';
   ['bf','bl','be','bc','bp','bn'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
-  document.querySelectorAll('.tslot').forEach(b=>b.classList.remove('selected'));
-  if(document.getElementById('nextTimeBtn'))document.getElementById('nextTimeBtn').disabled=true;
   if(document.getElementById('nextDateBtn'))document.getElementById('nextDateBtn').disabled=true;
 }
 function goBkStep(s){
   document.querySelectorAll('.bk-content').forEach(el=>el.classList.remove('active'));
   document.getElementById('bs-'+s).classList.add('active');
   document.querySelectorAll('.bk-step').forEach(el=>{const n=+el.dataset.s;el.classList.remove('active','done');if(n===s)el.classList.add('active');if(n<s)el.classList.add('done')});
-  if(s===5)populateConf();
+  if(s===4)populateConf();
 }
 function selSvc(card,svc){
   document.querySelectorAll('#bs-1 .scard').forEach(c=>c.style.borderColor='');
   card.style.borderColor='var(--blue-500)';bkData.svc=svc;
   setTimeout(()=>goBkStep(2),280);
 }
-function selTime(btn,t){
-  document.querySelectorAll('.tslot').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');bkData.time=t;
-  document.getElementById('nextTimeBtn').disabled=false;
-}
 function populateConf(){
   let ds=selDate?DS[selDate.getDay()]+', '+MS[selDate.getMonth()]+' '+selDate.getDate()+', '+selDate.getFullYear():'—';
   document.getElementById('cs').textContent=bkData.svc||'—';
   document.getElementById('cd').textContent=ds;
-  document.getElementById('ct').textContent=bkData.time||'—';
   const fn=document.getElementById('bf')?.value||'';
   const ln=document.getElementById('bl')?.value||'';
   document.getElementById('cn').textContent=(fn+' '+ln).trim()||'—';
@@ -1406,7 +1369,7 @@ async function confirmBk(){
   const params={
     service:   bkData.svc||'Not specified',
     date:      ds,
-    time:      bkData.time||'Not selected',
+    time:      'To be confirmed by our team',
     client_name: (fn+' '+ln).trim()||'Not provided',
     client_email: document.getElementById('be')?.value||'Not provided',
     company:   document.getElementById('bc')?.value||'Not provided',
